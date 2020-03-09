@@ -7,10 +7,18 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { RecipeListComponent } from './components/recipes/recipe-list/recipe-list.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    WelcomeComponent,
+    RecipeListComponent
   ],
   imports: [
     BrowserModule,

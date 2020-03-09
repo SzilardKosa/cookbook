@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { RecipeService } from './services/recipe.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +7,4 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
 
-  recipes: Observable<any[]>;
-
-  constructor(public recipeService: RecipeService) {
-    recipeService.getRecipes().subscribe(items => {
-      console.log(items);
-    })
-  }
 }

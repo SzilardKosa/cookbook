@@ -1,5 +1,4 @@
-<ul>
-  <li class="text" *ngFor="let recipe of recipes | async">
-    {{recipe.name}}
-  </li>
-</ul>
+<app-navbar></app-navbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

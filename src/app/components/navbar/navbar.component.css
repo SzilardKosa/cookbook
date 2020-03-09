@@ -1,0 +1,27 @@
+.nav-link {
+  font-size: 1.2rem ;
+}
+
+.loginButton {
+  color: white;
+}
+
+.showOnSmall {
+  display: flex;
+}
+
+.hideOnSmall {
+  display: none;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .showOnSmall {
+    display: none;
+  }
+  
+  .hideOnSmall {
+    display: flex;
+  }
+  
+ }
