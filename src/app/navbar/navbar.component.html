@@ -2,7 +2,7 @@
   <div class="container">
     
     <!-- Brand -->
-    <a class="navbar-brand" href="/">My Cookbook</a>
+    <a class="navbar-brand" routerLink="/">My Cookbook</a>
     
     <!-- Toggler -->
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -15,7 +15,7 @@
 
       <!-- Recipes list -->
       <ul class="navbar-nav mt-2 mt-md-0 mr-md-2">
-        <li class="nav-item"><a class="nav-link" href="/recipes">Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/recipes" routerLinkActive="active">Recipes</a></li>
       </ul>
 
       <!-- Search -->
@@ -32,15 +32,15 @@
 
       <div *ngIf="authService.afAuth.user | async as user; else showLogin">
         <ul class="navbar-nav mt-2 mt-md-0">
-          <li class="nav-item"><a class="nav-link" href="/favorites">Favorites</a></li>
-          <li class="nav-item"><a class="nav-link" href="/upload">Upload</a></li>
-          <li class="nav-item"><a class="nav-link" href="/planner">Planner</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/add-recipe" routerLinkActive="active">Upload</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/calculator" routerLinkActive="active">Calculator</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Profile
             </a>
             <div class="dropdown-menu" aria-labelledby="profile">
-              <a class="dropdown-item" href="/profile">My Profile</a>
+              <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">My Profile</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="authService.logout()">Logout</a>
             </div>

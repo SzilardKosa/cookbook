@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Login } from '../../models/login';
-import { Register } from '../../models/register';
+import { AuthService } from '../services/auth.service';
+import { Login } from '../models/login';
+import { Register } from '../models/register';
 
 
 @Component({

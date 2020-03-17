@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -9,10 +8,15 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { RecipeListComponent } from './components/recipes/recipe-list/recipe-list.component';
+
+import { RecipesModule } from './recipes/recipes.module';
+import { UserModule } from './user/user.module';
+
+import { NavbarComponent } from './navbar/navbar.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthService } from "./services/auth.service";
+
 
 
 
@@ -20,16 +24,18 @@ import { AuthService } from "./services/auth.service";
   declarations: [
     AppComponent,
     NavbarComponent,
-    WelcomeComponent,
-    RecipeListComponent
+    PageNotFoundComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFirestoreModule // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    RecipesModule,
+    UserModule,
+    AppRoutingModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
