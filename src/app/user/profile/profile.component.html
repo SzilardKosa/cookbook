@@ -1,1 +1,36 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h2>My Profile</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Add picture -->
+      <div class="form-group">
+        <img class="img-thumbnail" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+        <input type="file" class="form-control-file border">
+        <button type="submit" class="btn btn-primary mt-2">Save picture</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Change user info -->
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" value="Toby Nonerealman">
+        </div>
+        <div class="form-group">
+          <label for="emailReg">Email</label>
+          <input type="text" class="form-control" id="emailReg" value="toby56@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="passwordReg">Password</label>
+          <input type="password" class="form-control" id="passwordReg" value="password123">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Save changes</button>
+        <button class="btn btn-danger mt-2 ml-2">Delete Profile</button>
+      </form>
+    </div>
+  </div>
+</div>
