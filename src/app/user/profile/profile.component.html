@@ -17,16 +17,12 @@
       <!-- Change user info -->
       <form>
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" value="Toby Nonerealman">
+          <label for="name">Name: </label>
+          <input type="text" class="form-control" id="name" [value]="user?.displayName">
         </div>
         <div class="form-group">
-          <label for="emailReg">Email</label>
-          <input type="text" class="form-control" id="emailReg" value="toby56@gmail.com">
-        </div>
-        <div class="form-group">
-          <label for="passwordReg">Password</label>
-          <input type="password" class="form-control" id="passwordReg" value="password123">
+          <label for="emailReg">Email: </label>
+          <input type="text" class="form-control" id="emailReg" [value]="user?.email">
         </div>
         <button type="submit" class="btn btn-primary mt-2">Save changes</button>
         <button class="btn btn-danger mt-2 ml-2">Delete Profile</button>

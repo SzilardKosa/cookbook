@@ -23,19 +23,34 @@ export class NavbarComponent implements OnInit {
     password: ''
   }
 
-  constructor(public authService: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
   }
-
+  
   onSubmitReg(){
-    this.authService.register(this.regData);
     console.log("submitting reg");
+
+    this.auth.register(this.regData)
+    .then(credential => {
+      console.log(credential);
+      this.auth.createUserData(credential.user, this.regData);
+    })
+    .catch(error => {
+      console.log(error)
+    });
   }
 
   onSubmitLogin(){
-    this.authService.login(this.loginData);
     console.log("submitting login");
+
+    this.auth.login(this.loginData)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    });
   }
 
 

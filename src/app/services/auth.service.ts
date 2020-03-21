@@ -1,47 +1,63 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+// import { auth } from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { User } from "../models/user";
 import { Login } from "../models/login";
 import { Register } from "../models/register";
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn : boolean = false;
-  userData: User;
+  user$: Observable<User>;
+  
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private router: Router
+  ) {
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
 
-  constructor(public afAuth: AngularFireAuth) {
-    this.afAuth.auth.onAuthStateChanged(user => {
-      if(user){
-        this.loggedIn = true;
-        console.log("logged in");
-      } else {
-        this.loggedIn = false;
-        console.log("no user is signed in");
-      }}
-    )
-  } 
-
-  // register user with email&password
-  register(regData: Register){
-    this.afAuth.auth.createUserWithEmailAndPassword(regData.email, regData.password)
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+  register(regData: Register) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(regData.email, regData.password);
+  }
+  
+  async createUserData(user, regData: Register) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: regData.username,
+      photoURL: user.photoURL,
+    }
+    
+    await userRef.set(data);
   }
 
   // log in user with emial&password
   login(loginData: Login){
-    this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password)
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+    return this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password)
   }
 
-  logout(){
-    this.afAuth.auth.signOut()
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+  async logout() {
+    await this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
   }
 
 }
