@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { RecipeService } from '../../services/recipe.service';
-// import { Observable } from 'rxjs';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../models/recipe';
 
 
 @Component({
@@ -9,13 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  // recipes: Observable<any[]>;
+  recipes: Recipe[];
 
-  // constructor(public recipeService: RecipeService) {
-  //   this.recipes = recipeService.getRecipes()
-  // }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
+    this.recipeService.getRecipes().subscribe( recipes => {
+      console.log(recipes);
+      this.recipes = recipes;
+    })
   }
 
 }
