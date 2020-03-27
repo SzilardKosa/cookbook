@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models/recipe';
@@ -9,6 +9,7 @@ import { Recipe } from '../models/recipe';
 })
 export class RecipeService {
   recipesCollection: AngularFirestoreCollection<Recipe>;
+  recipeDoc: AngularFirestoreDocument<Recipe>;
   recipes: Observable<Recipe[]>;
 
   constructor(public afs: AngularFirestore) {
@@ -27,6 +28,11 @@ export class RecipeService {
 
   getRecipes():Observable<Recipe[]>{
     return this.recipes;
+  }
+
+  getRecipe(id: string):Observable<Recipe>{
+    this.recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
+    return this.recipeDoc.valueChanges();
   }
 
   addRecipe(recipe:Recipe){

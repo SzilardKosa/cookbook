@@ -17,7 +17,7 @@
         </div>
         <div class="card-body text-center">
           <h5 class="card-title">
-            <a routerLink="/recipe-detail" class="stretched-link">
+            <a [routerLink]="['/recipe-detail', recipe.id]" class="stretched-link">
               {{recipe.name}}
             </a>
           </h5>
