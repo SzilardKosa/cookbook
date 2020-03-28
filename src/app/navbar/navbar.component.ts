@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Login } from '../models/login';
 import { Register } from '../models/register';
@@ -11,13 +11,17 @@ import { Register } from '../models/register';
 })
 export class NavbarComponent implements OnInit {
 
+  hideRegError: boolean = true;
+  regError: string = '';
   regData: Register = {
     username: '',
     email: '',
     password: '',
     confPassword: ''
   };
-
+  
+  hideLoginError: boolean = true;
+  loginError: string = '';
   loginData: Login = {
     email: '',
     password: ''
@@ -35,10 +39,24 @@ export class NavbarComponent implements OnInit {
     .then(credential => {
       console.log(credential);
       this.auth.createUserData(credential.user, this.regData);
+      this.closeReg();
     })
     .catch(error => {
-      console.log(error)
+      console.log(error.message);
+      this.regError = error.message;
+      this.hideRegError = false;
     });
+  }
+
+  @ViewChild('closeRegModal', {static: false}) closeRegModal: ElementRef;
+  closeReg(){
+    this.closeRegModal.nativeElement.click();
+    this.resetRegError();
+  }
+
+  resetRegError(){
+    this.hideRegError = true;
+    this.regError = '';
   }
 
   onSubmitLogin(){
@@ -47,11 +65,24 @@ export class NavbarComponent implements OnInit {
     this.auth.login(this.loginData)
     .then(response => {
       console.log(response)
+      this.closeLogin();
     })
     .catch(error => {
-      console.log(error)
+      console.log(error.message);
+      this.loginError = error.message;
+      this.hideLoginError = false;
     });
   }
 
+  @ViewChild('closeLoginModal', {static: false}) closeLoginModal: ElementRef;
+  closeLogin(){
+    this.closeLoginModal.nativeElement.click();
+    this.resetLoginError();
+  }
+  
+  resetLoginError(){
+    this.hideLoginError = true;
+    this.loginError = '';
+  }
 
 }

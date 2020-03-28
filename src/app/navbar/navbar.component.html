@@ -84,12 +84,15 @@
       <div class="modal-header">
         <h5 class="modal-title" id="registerModalCenterTitle">Create an account</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                (click)="regForm.reset()">
+                (click)="regForm.reset(); resetRegError()" #closeRegModal>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
+        <div [hidden]="hideRegError" class="alert alert-danger">
+            {{regError}}
+        </div>
         <form (ngSubmit)="onSubmitReg()"  #regForm="ngForm" id="register">
           <div class="form-group">
             <label for="username">Username</label>
@@ -152,12 +155,15 @@
       <div class="modal-header">
         <h5 class="modal-title" id="loginModalCenterTitle">Log in</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                (click)="loginForm.reset()">
+                (click)="loginForm.reset(); resetLoginError()" #closeLoginModal>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
+        <div [hidden]="hideLoginError" class="alert alert-danger">
+            {{loginError}}
+        </div>
         <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm" id="login">
           <div class="form-group">
             <label for="emailLogin">Email address</label>
