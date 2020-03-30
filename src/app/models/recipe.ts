@@ -7,7 +7,7 @@ export interface Recipe {
   difficulty: string,
   ingredients: Ingredient[],
   steps: Step[],
-  date: Date,
+  date: any,
   uid: string,
   photoURL: string,
   categories?: Category,

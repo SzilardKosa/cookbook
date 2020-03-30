@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -13,16 +15,21 @@ import { Recipe } from '../../models/recipe';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe$: Observable<Recipe>;
+  user$: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private afs: AngularFirestore,
   ) { }
 
   ngOnInit() {
-    this.recipe$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.recipeService.getRecipe(params.get('id')))
+    let id = this.route.snapshot.paramMap.get('id');
+    this.recipe$ = this.recipeService.getRecipe(id);
+    this.user$ = this.recipe$.pipe(
+      switchMap(recipe => {
+        return this.afs.doc<User>(`users/${recipe.uid}`).valueChanges();
+      })
     );
   }
 

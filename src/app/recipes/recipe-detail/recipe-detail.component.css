@@ -1,7 +1,7 @@
 /* Sizing top image */
 .cb-img-container {
   width: 100%;
-  padding-bottom: 75%;
+  padding-bottom: 70%;
   position: relative;
 }
 
@@ -44,4 +44,61 @@
 
 .cb-circle-button:hover{
   background-color: lightcoral;
+}
+
+/* Rating */
+.cb-rating {
+  font-size: 1.5rem;
+  display: inline;
+}
+
+.fa-star.checked {
+  color: lightcoral;
+}
+
+/* Stats cards */
+.cb-stats-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cb-stats-card {
+  background: lightcoral;
+  box-shadow: gray 0 0 10px;
+  transition: .3s ease;
+  margin: 1rem auto;
+  width: 10rem;
+  height: 5rem;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 0;
+}
+
+.cb-stats-card:hover {
+  background: black;
+  color: lightcoral;
+}
+
+.cb-stats-card i, .cb-stats-name, .cb-stats-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-stats-card i{
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.cb-stats-name {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.cb-stats-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  align-items: flex-start;
 }

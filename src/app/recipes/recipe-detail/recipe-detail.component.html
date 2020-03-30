@@ -1,13 +1,9 @@
 <div *ngIf="recipe$ | async as recipe" class="container">
-  <div class="row">
-    <div class="col-12">
-      <h2>{{recipe.name}} </h2>
-    </div>
-  </div>
+  
 
-  <div class="row">
+  <div class="row mt-4">
     <!-- Picture -->
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <div class="cb-img-container">
         <div class="cb-img" [ngStyle]="{'background-image': 'url(' + recipe.photoURL +')'}">
           <div class="cb-circle-button">
@@ -19,31 +15,100 @@
         </div>
       </div>
     </div>
-    <!-- Kid info -->
-    <div class="col-md-6">
 
-      <p>User:</p>
-      <p>Date:</p>
+    <!-- Basic Data -->
+    <div class="col-lg-6">
+
       <div class="row">
-        <div class="col-4">Difficulty</div>
-        <div class="col-4">Time</div>
-        <div class="col-4">Price</div>
+        <div class="col-12">
+          <h2 class="mt-0">{{recipe.name}} </h2>
+        </div>
       </div>
-      <p>Rating</p>
+
+      <div class="row">
+        <div class="col-12">
+          <p class="lead"> {{recipe.description}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div *ngIf="user$ | async as user">
+            <p>Recipe by: {{user.displayName}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <p>Date: {{recipe.date.toDate() | date}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 mt-4 mb-2">
+          <div class="cb-rating">Rating: </div>
+          <span class="fa fa-star checked fa-2x"></span>
+          <span class="fa fa-star checked fa-2x"></span>
+          <span class="fa fa-star checked fa-2x"></span>
+          <span class="fa fa-star checked fa-2x"></span>
+          <span class="fa fa-star fa-2x"></span>
+        </div>
+      </div>
+
+      <div class="cb-stats-cards mt-4">
+        <div class="cb-stats-card">
+          <i class="fas fa-utensil-spoon fa-2x"></i>
+          <span class="cb-stats-name">Difficulty</span>
+          <span class="cb-stats-value">{{recipe.difficulty}} </span>
+        </div>
+        <div class="cb-stats-card">
+          <i class="fas fa-stopwatch fa-2x"></i>
+          <span class="cb-stats-name">Time</span>
+          <span class="cb-stats-value">{{recipe.time}} min</span>
+        </div>
+        <div class="cb-stats-card">
+          <i class="fas fa-wallet fa-2x"></i>
+          <span class="cb-stats-name">Price</span>
+          <span class="cb-stats-value">{{recipe.price}} </span>
+        </div>
+      </div>
+      
 
     </div>
   </div>
 
   <div class="row">
+    <!-- Ingredients -->
     <div class="col-md-6">
-      <h2>Ingredients</h2>
+      <h3>Ingredients</h3>
+      <ul class="ingredients">
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ingredient.name}}
+        </li>
+      </ul>
     </div>
+    <!-- Method -->
     <div class="col-md-6">
-      <h2>Method</h2>
+      <h3>Method</h3>
+      <div class="steps">
+        <div *ngFor="let step of recipe.steps; index as i" class="step row">
+          <div class="col-2">
+            <div class="cb-circle-button">
+              <a href="#"> {{i+1}} </a>
+            </div>
+          </div>
+          <div class="col-8">
+            <p> {{step.description}} </p>
+          </div>
+          <div class="col-2">
+            <p> {{step.active}} </p>
+            <p> {{step.time}} </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row">
+    <!-- Categories -->
     <div class="c0l-12">
       <h3>Categories</h3>
     </div>
