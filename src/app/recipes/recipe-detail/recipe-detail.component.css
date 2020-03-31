@@ -66,9 +66,10 @@
 
 .cb-stats-card {
   background: lightcoral;
+  box-shadow: gray 0 0 5px;
   border-radius: 0.5rem;
   transition: .3s ease;
-  margin: 1rem auto;
+  margin: auto;
   width: 10rem;
   height: 5rem;
 
@@ -77,10 +78,10 @@
   grid-column-gap: 0;
 }
 
-.cb-stats-card:hover {
+/* .cb-stats-card:hover {
   background: black;
   color: lightcoral;
-}
+} */
 
 .cb-stats-card i, .cb-stats-name, .cb-stats-value {
   display: flex;
@@ -145,11 +146,24 @@
   background-color: black;
 }
 
-.cb-checked .cb-ingredient-item {
+.cb-checked .cb-step-desc {
   text-decoration: line-through;
 }
 
-.cb-checked .cb-step-desc {
+/* Ingredients bulletpoint */
+/* Default */
+.cb-bullet{
+  background-color: lightcoral;
+  transition: .2s ease;
+  height: .5rem;
+  width: .5rem;
+}
+/* Checked */
+.cb-checked .cb-bullet {
+  background-color: black;
+}
+
+.cb-checked .cb-ingredient-item{
   text-decoration: line-through;
 }
 
@@ -205,5 +219,31 @@
   transition: .2s ease;
 }
 .cb-step:hover, .cb-ingredient:hover{
+  box-shadow: gray 0 0 10px;
+}
+
+/* Categories */
+
+.cb-categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cb-category{
+  background: darkred;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  height: 3rem;
+  padding: 0 1rem;
+  margin: 0 .5rem;
+  color: lightcoral;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-category:hover {
   box-shadow: gray 0 0 10px;
 }

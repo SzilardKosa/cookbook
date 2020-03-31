@@ -1,77 +1,83 @@
 <div *ngIf="recipe$ | async as recipe" class="container">
   
+  <div class="row">
+    <div class="col-12">
+      <div class="row mt-4 d-flex d-lg-block">
 
-  <div class="row mt-4">
-    <!-- Picture -->
-    <div class="col-lg-6">
-      <div class="cb-img-container">
-        <div class="cb-img" [ngStyle]="{'background-image': 'url(' + recipe.photoURL +')'}">
-          <div class="cb-circle-button">
-            <a href="#"><i class="fas fa-bookmark"></i></a>
+        <!-- Picture -->
+        <div class="col-lg-6 order-1 float-left">
+          <div class="cb-img-container">
+            <div class="cb-img" [ngStyle]="{'background-image': 'url(' + recipe.photoURL +')'}">
+              <div class="cb-circle-button">
+                <a href="#"><i class="fas fa-bookmark"></i></a>
+              </div>
+              <div class="cb-circle-button">
+                <a href="#"><i class="fas fa-calculator"></i></a>
+              </div>
+            </div>
           </div>
-          <div class="cb-circle-button">
-            <a href="#"><i class="fas fa-calculator"></i></a>
+        </div>  
+
+        <!-- Title -->
+        <div class="col-lg-6 order-0 float-left">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="mt-0">{{recipe.name}} </h2>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Basic Data -->
-    <div class="col-lg-6">
-
-      <div class="row">
-        <div class="col-12">
-          <h2 class="mt-0">{{recipe.name}} </h2>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <p class="lead"> {{recipe.description}}</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div *ngIf="user$ | async as user">
-            <p>Recipe by: {{user.displayName}}</p>
-          </div>
-        </div>
-        <div class="col-6">
-          <p>Date: {{recipe.date.toDate() | date}}</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 mt-4 mb-2">
-          <div class="cb-rating">Rating: </div>
-          <span class="fa fa-star checked fa-2x"></span>
-          <span class="fa fa-star checked fa-2x"></span>
-          <span class="fa fa-star checked fa-2x"></span>
-          <span class="fa fa-star checked fa-2x"></span>
-          <span class="fa fa-star fa-2x"></span>
-        </div>
-      </div>
-
-      <div class="cb-stats-cards mt-4">
-        <div class="cb-stats-card">
-          <i class="fas fa-utensil-spoon fa-2x"></i>
-          <span class="cb-stats-name">Difficulty</span>
-          <span class="cb-stats-value">{{recipe.difficulty}} </span>
-        </div>
-        <div class="cb-stats-card">
-          <i class="fas fa-stopwatch fa-2x"></i>
-          <span class="cb-stats-name">Time</span>
-          <span class="cb-stats-value">{{recipe.time}} min</span>
-        </div>
-        <div class="cb-stats-card">
-          <i class="fas fa-wallet fa-2x"></i>
-          <span class="cb-stats-name">Price</span>
-          <span class="cb-stats-value">{{recipe.price}} </span>
-        </div>
-      </div>
       
+          <div class="row">
+            <div class="col-12">
+              <p class="lead"> {{recipe.description}}</p>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-6">
+              <div *ngIf="user$ | async as user">
+                <p>Recipe by: {{user.displayName}}</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <p>Date: {{recipe.date.toDate() | date}}</p>
+            </div>
+          </div>
+        </div> 
 
+        <!-- Basic Data -->
+        <div class="col-lg-6 order-1 float-left">
+
+          <div class="row">
+            <div class="col-12 mt-4 mb-2">
+              <div class="cb-rating">Rating: </div>
+              <span class="fa fa-star checked fa-2x"></span>
+              <span class="fa fa-star checked fa-2x"></span>
+              <span class="fa fa-star checked fa-2x"></span>
+              <span class="fa fa-star checked fa-2x"></span>
+              <span class="fa fa-star fa-2x"></span>
+            </div>
+          </div>
+
+          <div class="cb-stats-cards mt-2 mt-lg-3">
+            <div class="cb-stats-card mt-1">
+              <i class="fas fa-utensil-spoon fa-2x"></i>
+              <span class="cb-stats-name">Difficulty</span>
+              <span class="cb-stats-value">{{recipe.difficulty}} </span>
+            </div>
+            <div class="cb-stats-card mt-1">
+              <i class="fas fa-stopwatch fa-2x"></i>
+              <span class="cb-stats-name">Time</span>
+              <span class="cb-stats-value">{{recipe.time}} min</span>
+            </div>
+            <div class="cb-stats-card mt-1">
+              <i class="fas fa-wallet fa-2x"></i>
+              <span class="cb-stats-name">Price</span>
+              <span class="cb-stats-value">{{recipe.price}} </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
@@ -79,10 +85,10 @@
     <!-- Ingredients -->
     <div class="col-md-4">
       <form class="form-inline my-4">
-        <h3>Ingredients for </h3>
+        <h4>Ingredients for </h4>
         <input type="number" [min]="recipe.serves" [step]="recipe.serves" id="serves" class="form-control mx-2"
                [(ngModel)]="currentServes" name="serves" onkeydown="return false">
-        <h3> serves</h3>
+        <h4> serves</h4>
       </form>
       <div class="cb-ingredients">
 
@@ -91,9 +97,7 @@
               (click)="toggleClass($event,'cb-checked')">
 
           <div>
-            <div class="cb-checkbox mx-2">
-              <p class="cb-active">{{i+1}}</p>
-              <i class="fas fa-check cb-done"></i>
+            <div class="cb-bullet mx-2 my-2">
             </div>
           </div>
 
@@ -148,8 +152,12 @@
 
   <div class="row">
     <!-- Categories -->
-    <div class="c0l-12">
-      <h3>Categories</h3>
+    <div class="col-12 mt-4 mb-4 cb-categories">
+      <h3 class="mt-2 pt-1">Categories</h3>
+      <div *ngFor="let categorie of testCategories" class="cb-category mt-2 mb-0">
+        {{categorie}}
+      </div>
     </div>
+
   </div>
 </div>

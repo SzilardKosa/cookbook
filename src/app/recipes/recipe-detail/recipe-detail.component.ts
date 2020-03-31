@@ -17,6 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   currentServes: number;
   recipe$: Observable<Recipe>;
   user$: Observable<User>;
+  testCategories: string[] = ["Main Course", "Lunch", "Thanksgiving", "Italian"];
 
   constructor(
     private route: ActivatedRoute,

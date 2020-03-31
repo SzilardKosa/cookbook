@@ -30,17 +30,14 @@
         </div>
       </form>
 
-      <div *ngIf="auth.user$ | async; then authenticated else guest">
-      </div>
-      
-      <ng-template #authenticated>
+      <div *ngIf="auth.user$ | async as user; else guest">
         <ul class="navbar-nav mt-2 mt-md-0">
           <li class="nav-item"><a class="nav-link" routerLink="/add-recipe" routerLinkActive="active">Upload</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/calculator" routerLinkActive="active">Calculator</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Profile
+              {{user.displayName}}
             </a>
             <div class="dropdown-menu" aria-labelledby="profile">
               <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">My Profile</a>
@@ -49,8 +46,8 @@
             </div>
           </li>
         </ul>
-      </ng-template>
-
+      </div>
+      
       <ng-template #guest>
         <ul class="navbar-nav mt-2 mt-md-0 hideOnSmall">
           <li class="mt-2 mt-md-0 nav-item">
