@@ -107,16 +107,33 @@
 
 /* Steps checkbox button*/
 /* Default */
-.cb-checkbox{
-  background-color: lightcoral;
-  border-radius: 50%;
-  transition: .2s ease;
+.cb-scene {
   height: 2.5rem;
   width: 2.5rem;
+  perspective: 6rem;
+}
 
+.cb-checkbox{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transition: transform .8s;
+  transform-style: preserve-3d;
+}
+
+.cb-checkbox-face {
+  border-radius: 50%;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cb-checkbox-front {
+  background-color: lightcoral;
 }
 
 .cb-active{
@@ -124,26 +141,21 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
-  transition: .2s ease;
+}
+
+.cb-checkbox-back {
+  background-color: black;
+  transform: rotateY( 180deg );
 }
 
 .cb-done {
-  transition: .2s ease;
-  display: none;
-}
-
-/* Checked */
-.cb-checked .cb-active{
-  display: none;
-}
-
-.cb-checked .cb-done {
-  display: block;
   color: lightcoral;
 }
 
+/* Checked */
+
 .cb-checked .cb-checkbox {
-  background-color: black;
+  transform: rotateY(180deg);
 }
 
 .cb-checked .cb-step-desc {

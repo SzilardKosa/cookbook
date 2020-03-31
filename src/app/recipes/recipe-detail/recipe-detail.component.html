@@ -121,9 +121,15 @@
               (click)="toggleClass($event,'cb-checked')">
               
           <div>
-            <div class="cb-checkbox mx-2 mx-md-4">
-              <p class="cb-active">{{i+1}}</p>
-              <i class="fas fa-check cb-done"></i>
+            <div class="cb-scene mx-2 mx-md-4">
+              <div class="cb-checkbox">
+                <div class="cb-checkbox-face cb-checkbox-front">
+                  <p class="cb-active">{{i+1}}</p>
+                </div>
+                <div class="cb-checkbox-face cb-checkbox-back">
+                  <i class="fas fa-check cb-done"></i>
+                </div>
+              </div>
             </div>
           </div>
 
