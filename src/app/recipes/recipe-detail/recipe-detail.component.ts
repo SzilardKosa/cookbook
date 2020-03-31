@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { User } from '../../models/user';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
+  currentServes: number;
   recipe$: Observable<Recipe>;
   user$: Observable<User>;
 
@@ -21,16 +22,31 @@ export class RecipeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private afs: AngularFirestore,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
     this.recipe$ = this.recipeService.getRecipe(id);
+    this.recipe$.subscribe(recipe => {
+      this.currentServes = recipe.serves;
+    });
     this.user$ = this.recipe$.pipe(
       switchMap(recipe => {
         return this.afs.doc<User>(`users/${recipe.uid}`).valueChanges();
       })
     );
+  }
+
+  toggleClass(event: any, className: string) {
+    const hasClass = event.currentTarget.classList.contains(className);
+    console.log("toggle "+className);
+  
+    if(hasClass) {
+      this.renderer.removeClass(event.currentTarget, className);
+    } else {
+      this.renderer.addClass(event.currentTarget, className);
+    }
   }
 
 }

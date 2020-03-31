@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
@@ -18,7 +18,8 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
   imports: [
     CommonModule,
     RecipesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class RecipesModule { }

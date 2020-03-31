@@ -3,6 +3,7 @@
   width: 100%;
   padding-bottom: 70%;
   position: relative;
+  box-shadow: gray 0 0 10px;
 }
 
 .cb-img {
@@ -65,7 +66,7 @@
 
 .cb-stats-card {
   background: lightcoral;
-  box-shadow: gray 0 0 10px;
+  border-radius: 0.5rem;
   transition: .3s ease;
   margin: 1rem auto;
   width: 10rem;
@@ -101,4 +102,108 @@
   font-size: 1.25rem;
   font-weight: 600;
   align-items: flex-start;
+}
+
+/* Steps checkbox button*/
+/* Default */
+.cb-checkbox{
+  background-color: lightcoral;
+  border-radius: 50%;
+  transition: .2s ease;
+  height: 2.5rem;
+  width: 2.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-active{
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  transition: .2s ease;
+}
+
+.cb-done {
+  transition: .2s ease;
+  display: none;
+}
+
+/* Checked */
+.cb-checked .cb-active{
+  display: none;
+}
+
+.cb-checked .cb-done {
+  display: block;
+  color: lightcoral;
+}
+
+.cb-checked .cb-checkbox {
+  background-color: black;
+}
+
+.cb-checked .cb-ingredient-item {
+  text-decoration: line-through;
+}
+
+.cb-checked .cb-step-desc {
+  text-decoration: line-through;
+}
+
+/* Ingredient */
+#serves {
+  width: 4rem;
+}
+
+.cb-ingredient-item {
+  margin: 0;
+}
+
+.cb-ingredients {
+  background-color: white;
+}
+
+/* Steps */
+.cb-step-desc {
+  text-align: justify;
+}
+
+.cb-step-stats {
+  width: 6rem;
+  display: grid;
+  grid-template-columns: 2rem auto;
+  grid-column-gap: 0;
+}
+
+.cb-step-stats i, .cb-step-stats span, .cb-activity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-step-stats i {
+  justify-content: flex-end;
+}
+
+.cb-activity{
+  font-size: 1.25rem;
+  font-weight: 400;
+  grid-column-start:  1;
+  grid-column-end: 3;
+}
+
+.cb-step {
+  background-color: white;
+  border-radius: 1rem;
+}
+
+/* Ingredients/steps Hovered */
+.cb-step, .cb-ingredient {
+  transition: .2s ease;
+}
+.cb-step:hover, .cb-ingredient:hover{
+  box-shadow: gray 0 0 10px;
 }
