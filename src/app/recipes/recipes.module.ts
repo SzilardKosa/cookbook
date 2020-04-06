@@ -8,6 +8,8 @@ import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
+import { StarRatingModule } from 'angular-star-rating';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
     CommonModule,
     RecipesRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    StarRatingModule.forRoot()
   ]
 })
 export class RecipesModule { }

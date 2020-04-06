@@ -53,9 +53,13 @@
   display: inline;
 }
 
-.fa-star.checked {
-  color: lightcoral;
+.cb-rating-stars {
+  display: inline-block;
 }
+
+/* .fa-star.checked {
+  color: lightcoral;
+} */
 
 /* Stats cards */
 .cb-stats-cards {

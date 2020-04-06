@@ -1,3 +1,13 @@
+@import '~css-star-rating/css/star-rating';
+
+.rating.color-default .star-container .star svg{
+  fill: lightcoral !important;
+}
+
+.cb-rating-stars:hover .rating.color-default .star-container .star svg{
+  fill: #ffc058 !important;
+}
+
 body {
   background-color: #f8f8f8;
 }
