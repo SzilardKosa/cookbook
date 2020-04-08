@@ -38,4 +38,9 @@ export class RecipeService {
   addRecipe(recipe:Recipe){
     return this.recipesCollection.add(recipe);
   }
+
+  updateRecipe(id:string, recipe:Recipe) {
+    this.recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
+    return this.recipeDoc.update(recipe);
+  }
 }

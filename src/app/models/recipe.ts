@@ -12,6 +12,7 @@ export interface Recipe {
   photoURL: string,
   categories?: Category,
   id?: string,
+  ratings?: Object
 }
 
 export interface Ingredient {

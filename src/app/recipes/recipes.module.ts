@@ -9,13 +9,15 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
 import { StarRatingModule } from 'angular-star-rating';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 
 @NgModule({
   declarations: [
     RecipeListComponent,
     RecipeDetailComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { StarRatingModule } from 'angular-star-rating';
     ReactiveFormsModule,
     FormsModule,
     StarRatingModule.forRoot()
-  ]
+  ],
+  entryComponents: [ConfirmModalComponent]
 })
 export class RecipesModule { }
