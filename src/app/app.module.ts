@@ -17,7 +17,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthService } from "./services/auth.service";
 
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -25,11 +27,14 @@ import { AuthService } from "./services/auth.service";
     AppComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -38,6 +43,7 @@ import { AuthService } from "./services/auth.service";
     AppRoutingModule,
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginComponent, RegisterComponent]
 })
 export class AppModule { }

@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h5 class="modal-title">Create an account</h5>
+  <button type="button" class="close" (click)="regForm.reset(); close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div [hidden]="hideRegError" class="alert alert-danger">
+      {{regError}}
+  </div>
+  <form (ngSubmit)="onSubmitReg()"  #regForm="ngForm" id="register">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username"
+       required
+       [(ngModel)]="regData.username" name="username"
+       #username="ngModel">
+      <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          Username is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="name@example.com"
+      required
+      [(ngModel)]="regData.email" name="email"
+      #email="ngModel">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Email is required
+      </div> 
+    </div>
+    <div class="form-group">
+      <label for="pass">Password</label>
+      <input type="password" class="form-control" id="pass"
+      required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+      [(ngModel)]="regData.password" name="password"
+      #password="ngModel">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors.required"> Password is required </div>
+        <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passConf">Confirm Password</label>
+      <input type="password" class="form-control" id="passConf"
+      required pattern="{{ password.value }}"
+      [(ngModel)]="regData.confPassword" name="confPassword"
+      #passwordConf="ngModel">
+      <div *ngIf="passwordConf.invalid && (passwordConf.dirty || passwordConf.touched)" class="alert alert-danger">
+        <div *ngIf="passwordConf.errors.required"> Confirm password is required </div>
+        <div *ngIf="passwordConf.errors.pattern"> Password & Confirm Password does not match</div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="submit" form="register" class="btn btn-primary" [disabled]="!regForm.form.valid">Create account</button>
+</div>
