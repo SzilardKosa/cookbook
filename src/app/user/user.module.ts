@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 import { UserRoutingModule } from './user-routing.module';
 
@@ -16,7 +17,8 @@ import { CalculatorComponent } from './calculator/calculator.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule,
   ]
 })
 export class UserModule { }

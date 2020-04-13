@@ -1,5 +1,8 @@
 <div class="container">
-  <h1>Favorites</h1>
-  <h2>This feautre is under development!</h2>
-  <img src="http://4gr8media.co.uk/wp-content/uploads/2017/04/coming-soon.png" style="margin: auto; display: block;">
+  <div class="row">
+    <h3 style="margin-left: 5rem;">Favorites</h3>
+  </div>
+
+  <app-recipe-cards [recipes]="favorites$ | async"></app-recipe-cards>
+
 </div>

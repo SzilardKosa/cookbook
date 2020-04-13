@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models/recipe';
+import { firestore } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,18 @@ export class RecipeService {
 
   getRecipes():Observable<Recipe[]>{
     return this.recipes;
+  }
+
+  getFavorites(ids: string[]){
+    // The in operator max 10 ids can query!!
+    const favorites = this.afs.collection('recipes', ref => ref.where(firestore.FieldPath.documentId(), 'in', ids));
+    return favorites.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Recipe;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
   getRecipe(id: string):Observable<Recipe>{
