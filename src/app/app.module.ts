@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 
 import { RecipesModule } from './recipes/recipes.module';
 import { UserModule } from './user/user.module';
+import { SharedModule } from './shared/shared.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
@@ -29,7 +30,7 @@ import { RegisterComponent } from './register/register.component';
     PageNotFoundComponent,
     WelcomePageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { RegisterComponent } from './register/register.component';
     AngularFirestoreModule,
     RecipesModule,
     UserModule,
+    SharedModule,
     AppRoutingModule,
   ],
   providers: [AuthService],

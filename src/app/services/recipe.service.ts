@@ -40,7 +40,7 @@ export class RecipeService {
   }
 
   updateRecipe(id:string, recipe:Recipe) {
-    this.recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
-    return this.recipeDoc.update(recipe);
+    const recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
+    return recipeDoc.update(recipe);
   }
 }

@@ -1,40 +1,11 @@
-/* Flexible grid layout */
-.cb-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 20rem);
-  grid-auto-rows: 30rem;
-  grid-gap: 0.5rem;
-  justify-content: center;
-}
-
-.card {
-  margin: auto;
-  width: 20rem;
-  height: 30rem;
-  border: none;
-  transition: .3s ease;
-}
-
-.card:hover {
-  box-shadow: gray 0 0 20px;
-}
-
-/* Sizing top image */
-.cb-img {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 20rem;
-}
-
 /* Circle buttons */
 .cb-circle-button{
+  cursor: pointer;
   position: relative;
   float: right;
   z-index: 2;
   background-color: black;
   border-radius: 50%;
-  transition: .2s ease;
   margin-left: 20px;
 }
 
@@ -46,16 +17,17 @@
   text-decoration: none;
   height: 40px;
   width: 40px;
-  transition: .2s ease;
 }
 
 .cb-circle-button a:hover,.cb-circle-button a:active{
   color: black;
   text-decoration: none;
+  transition: .2s ease;
 }
 
 .cb-circle-button:hover{
   background-color: lightcoral;
+  transition: .2s ease;
 }
 
 /* Button is selected */
@@ -65,10 +37,4 @@
 
 .cb-circle-button.cb-selected a{
   color: black;
-}
-
-/* Stretched link style */
-.stretched-link {
-  text-decoration: none;
-  color: #212529;
 }

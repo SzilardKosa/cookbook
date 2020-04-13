@@ -1,0 +1,5 @@
+<div class="cb-circle-button"
+      (click)="updateFavorites(recipeId)"
+      [ngClass]="{'cb-selected': isFavorite(recipeId)}">
+  <a><i [ngClass]="iconType"></i></a>
+</div>

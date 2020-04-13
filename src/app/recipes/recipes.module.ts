@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
@@ -13,18 +14,19 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 
 @NgModule({
-  declarations: [
-    RecipeListComponent,
-    RecipeDetailComponent,
-    AddRecipeComponent,
-    ConfirmModalComponent
-  ],
   imports: [
     CommonModule,
     RecipesRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    StarRatingModule.forRoot()
+    StarRatingModule.forRoot(),
+    SharedModule
+  ],
+  declarations: [
+    RecipeListComponent,
+    RecipeDetailComponent,
+    AddRecipeComponent,
+    ConfirmModalComponent
   ],
   entryComponents: [ConfirmModalComponent]
 })

@@ -8,11 +8,9 @@
       <div *ngFor="let recipe of recipes" class="card">
         <div class="cb-img" [ngStyle]="{'background-image': 'url(' + recipe.photoURL +')'}"></div>
         <div class="card-img-overlay">
+          <app-circle-button [recipeId]="recipe.id" iconType="fas fa-bookmark"></app-circle-button>
           <div class="cb-circle-button">
-            <a href="#"><i class="fas fa-bookmark"></i></a>
-          </div>
-          <div class="cb-circle-button">
-            <a href="#"><i class="fas fa-calculator"></i></a>
+            <a><i class="fas fa-calculator"></i></a>
           </div>
         </div>
         <div class="card-body text-center">

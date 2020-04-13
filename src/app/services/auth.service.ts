@@ -60,4 +60,9 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  updateUser(user:User) {
+    const userDoc = this.afs.doc<User>(`users/${user.uid}`);
+    return userDoc.update(user);
+  }
+
 }
