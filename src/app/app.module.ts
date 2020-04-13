@@ -13,14 +13,12 @@ import { RecipesModule } from './recipes/recipes.module';
 import { UserModule } from './user/user.module';
 import { SharedModule } from './shared/shared.module';
 
-import { NavbarComponent } from './navbar/navbar.component';
-import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AuthService } from "./services/auth.service";
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -29,8 +27,6 @@ import { RegisterComponent } from './register/register.component';
     NavbarComponent,
     PageNotFoundComponent,
     WelcomePageComponent,
-    LoginComponent,
-    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +41,6 @@ import { RegisterComponent } from './register/register.component';
     AppRoutingModule,
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, RegisterComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

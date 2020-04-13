@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Login } from '../models/login';
+import { Login } from '../../models/login';
 
 @Component({
   selector: 'app-login',
