@@ -6,10 +6,92 @@
   margin: 0;
 }
 
+.cb-title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* Neumorphism */
+
+.cb-soft-card {
+  width: 100%;
+  margin: .5rem;
+  padding: 1rem;
+  border-radius: 2.5rem;
+  background: #ecf0f3;
+  box-shadow: 13px 13px 20px #cbced1,
+              -13px -13px 20px #ffffff;
+}
+
+.cb-soft-card-title {
+  text-align: center;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.cb-soft-img {
+  border-radius: 1rem;
+  box-shadow: 
+  /* logo shadow */
+  0px 0px 2px #5f5f5f,
+  /* offset */
+  0px 0px 0px 5px #ecf0f3,
+  /*bottom right */
+  8px 8px 15px #a7aaaf,
+  /* top left */
+  -8px -8px 15px #ffffff
+}
+
+/* .cb-soft-field {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.125rem;
+  color: #555;
+  padding: 1.25rem;
+  
+  margin-bottom: 1.875rem;
+  border-radius: 25px;
+  box-shadow: inset 8px 8px 8px #cbced1,
+              inset -8px -8px 8px #ffffff;
+} */
+
+.cb-soft-btn {
+  outline: none;
+  border:none;
+  cursor: pointer;
+  width:100%;
+  height: 60px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Lato', sans-serif;
+  color:#fff;
+  text-align: center;
+  background: #24cfaa;
+  box-shadow: 3px 3px 8px #b1b1b1,
+              -3px -3px 8px #ffffff;
+  transition: 0.5s;
+}
+
+.cb-soft-btn:hover {
+  background:#2fdbb6;
+}
+
+.cb-soft-btn:active {
+  background:#1da88a;
+}
+
+.cb-soft-btn:disabled {
+  background:#2fdbb6;
+}
+
+
 .ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+  border-left: 5px solid #42A948;
 }
 
 .ng-invalid:not(form):not(div)  {
-  border-left: 5px solid #a94442; /* red */
+  border-left: 5px solid #a94442;
 }

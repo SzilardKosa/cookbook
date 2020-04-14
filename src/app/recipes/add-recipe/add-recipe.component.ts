@@ -17,7 +17,7 @@ export class AddRecipeComponent implements OnInit {
   user: User;
   photo: File;
   uploadPercent: Observable<number>;
-  imagePreview: string | ArrayBuffer = "https://bulma.io/images/placeholders/480x480.png";
+  imagePreview: string | ArrayBuffer = "https://bulma.io/images/placeholders/640x320.png";
   recipeForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
@@ -39,7 +39,6 @@ export class AddRecipeComponent implements OnInit {
         active: [true, Validators.required],
       })
     ]),
-    photoURL: ['', Validators.required],
     // categories: this.fb.group({
     //   course: this.fb.array([
     //     this.fb.control('')
@@ -101,13 +100,20 @@ export class AddRecipeComponent implements OnInit {
     this.steps.removeAt(i);
   }
 
-  changeFile(file: File) {
+  changeFile(event: any) {
+    const target = event.target;
+    const file = target.files[0];
     if (file) {
-      this.photo = file;
+      const maxAllowedSize = 5 * 1024 * 1024; // max 5MB
+      if (file.size > maxAllowedSize){
+        alert("File is too big");
+        target.value = "";
+        return;
+      }
 
+      this.photo = file;
       const reader = new FileReader();
       reader.readAsDataURL(file);
-
       reader.onload = event => {
         this.imagePreview = reader.result;
       };

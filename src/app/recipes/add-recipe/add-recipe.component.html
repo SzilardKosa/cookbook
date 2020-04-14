@@ -2,33 +2,61 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Add new recipe</h2>
+      <h2 class="mt-5 cb-title">Add new recipe</h2>
       <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
 
-        <h3>Basic data</h3>
-        <div class="form-group">
-          <label for="name">Name of the recipe</label>
-          <input type="text" class="form-control" id="name" formControlName="name" required>
-        </div>
-        <div class="form-group">
-          <label for="description">Short description</label>
-          <input type="text" class="form-control" id="description" formControlName="description" required>
-        </div>
+        <!-- Basic Info and Picture-->
         <div class="row">
+          <div class="col-lg-6 order-lg-1 order-2 mt-5">
+            <div class="cb-soft-card">
+              <div class="cb-soft-card-title">
+                Picture
+              </div>
+              <div class="form-group">
+                <img class="img-fluid cb-soft-img" [src]="imagePreview">
+                <input type="file" accept="image/*"
+                       class="form-control-file border mt-3"
+                       required (change)="changeFile($event)">
+                <div>{{ uploadPercent | async }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-2 order-1 mt-5">
+            <div class="cb-soft-card">
+              <div class="cb-soft-card-title">
+                Basic data
+              </div>
+              <div class="form-group">
+                <label for="name">Name of the recipe</label>
+                <input type="text" class="form-control cb-soft-field" id="name" formControlName="name" required>
+              </div>
+              <div class="form-group">
+                <label for="desc">Short description</label>
+                <textarea class="form-control cb-soft-field" id="desc" formControlName="description" rows="3" required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="row mt-5 cb-soft-card">
+          <div class="col-12">
+            <div class="cb-soft-card-title">
+              Stats
+            </div>
+          </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="serves">Serves (person)</label>
-              <input type="number" min="1" step="1" class="form-control" id="serves" formControlName="serves" required>
+              <input type="number" min="1" step="1" class="form-control cb-soft-field" id="serves" formControlName="serves" required>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="time">Preparation time (minutes)</label>
-              <input type="number" min="15" step="15" class="form-control" id="time" formControlName="time" required>
+              <input type="number" min="15" step="15" class="form-control cb-soft-field" id="time" formControlName="time" required>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="price">Price</label>
@@ -51,11 +79,15 @@
           </div>
         </div>
 
-        <div formArrayName="ingredients">
-          <h3>Ingredients</h3>
+        <!-- Ingredients -->
+        <div formArrayName="ingredients" class="row mt-5 cb-soft-card">
+          <div class="col-12">
+            <div class="cb-soft-card-title">
+              Ingredients
+            </div>
+          </div>
 
-          <div *ngFor="let ingredient of ingredients.controls; let i=index">
-            <!-- The repeated ingredient template -->
+          <div *ngFor="let ingredient of ingredients.controls; let i=index" class="col-12">
             <div [formGroupName]="i">
               <div class="row">
                 <div class="col-md-2 form-group">
@@ -72,18 +104,24 @@
                 </div>
               </div>       
             </div>
-
           </div>
-          <div class="form-group">
-            <button type="button" class="btn btn-primary" (click)="addIngredient()">Add Ingredient</button>
+
+          <div class="col-12">
+            <div class="form-group mb-0">
+              <button type="button" class="btn btn-primary" (click)="addIngredient()">Add Ingredient</button>
+            </div>
           </div>
         </div>
 
-        <div formArrayName="steps">
-          <h3>Steps</h3>
+        <!-- Steps -->
+        <div formArrayName="steps" class="row mt-5 cb-soft-card">
+          <div class="col-12">
+            <div class="cb-soft-card-title">
+                Steps
+            </div>
+          </div>
 
-          <div *ngFor="let step of steps.controls; let i=index">
-            <!-- The repeated step template -->
+          <div *ngFor="let step of steps.controls; let i=index" class="col-12">
             <div [formGroupName]="i">
               <div class="row">
                 <div class="col-12 form-group">
@@ -105,26 +143,17 @@
                 </div>
               </div>
             </div>
-
           </div>
-          <div class="form-group">
-            <button type="button" class="btn btn-primary" (click)="addStep()">Add Step</button>
+
+          <div class="col-12">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" (click)="addStep()">Add Step</button>
+            </div>
           </div>
         </div>
 
-        <h3>Picture</h3>
-        <div class="form-group">
-          <label for="photo">Photo URL</label>
-          <input type="url" class="form-control" id="photo" formControlName="photoURL" required>
-        </div>
-        <div class="form-group">
-          <img class="img-fluid" [src]="imagePreview">
-          <input type="file" #fileInput class="form-control-file border" (change)="changeFile(fileInput.files[0])">
-          <div>{{ uploadPercent | async }}</div>
-        </div>
 
-
-        <button class="btn btn-primary my-2" type="submit" [disabled]="!recipeForm.valid">Submit</button>
+        <button class="btn my-5 cb-soft-btn" type="submit" [disabled]="!recipeForm.valid">Submit</button>
 
       </form>
     </div>
