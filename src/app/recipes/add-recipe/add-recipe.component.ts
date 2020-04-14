@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
@@ -14,6 +15,9 @@ import { User } from 'src/app/models/user';
 })
 export class AddRecipeComponent implements OnInit {
   user: User;
+  photo: File;
+  uploadPercent: Observable<number>;
+  imagePreview: string | ArrayBuffer = "https://bulma.io/images/placeholders/480x480.png";
   recipeForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
@@ -97,30 +101,59 @@ export class AddRecipeComponent implements OnInit {
     this.steps.removeAt(i);
   }
 
+  changeFile(file: File) {
+    if (file) {
+      this.photo = file;
 
-  onSubmit() {   
-    const newRecipe: Recipe = {
-      name: this.recipeForm.value.name,
-      description: this.recipeForm.value.description,
-      serves: this.recipeForm.value.serves,
-      time: this.recipeForm.value.time,
-      price: this.recipeForm.value.price,
-      difficulty: this.recipeForm.value.difficulty,
-      ingredients: this.recipeForm.value.ingredients,
-      steps: this.recipeForm.value.steps,
-      date: new Date(),
-      uid: this.user.uid,
-      photoURL: this.recipeForm.value.photoURL,
-    };
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = event => {
+        this.imagePreview = reader.result;
+      };
+    }
+  }
+
+  onSubmit() {
+    const recipeId = this.recipeService.getRecipeId();
+    console.log(recipeId);
+    console.log(this.photo);
+    this.uploadPhoto(recipeId);
+  }
+
+  uploadPhoto(recipeId: string) {
+    const task = this.recipeService.uploadPhoto(this.photo, `recipes/${recipeId}/${this.photo.name}`);
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task
+    .then(response => {
+      return response.ref.getDownloadURL();
+    })
+    .then( url => {
+      console.log(url);
+      this.uploadRecipe(recipeId, url);
+    })
+    .catch(error => {
+      console.log("catch");
+      console.log(error)
+    });
+  }
+
+  uploadRecipe(recipeId: string, photoURL: string){
+    let newRecipe: Recipe = this.recipeForm.value;
+    newRecipe.date = new Date();
+    newRecipe.uid = this.user.uid,
+    newRecipe.photoURL = photoURL;
 
     console.log(newRecipe);
 
-    this.recipeService.addRecipe(newRecipe).then(response => {
+    this.recipeService.addRecipe(newRecipe, recipeId)
+    .then(response => {
       console.log(response)
     })
     .catch(error => {
       console.log(error)
     });
   }
-
 }

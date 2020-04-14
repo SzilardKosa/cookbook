@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models/recipe';
@@ -13,7 +14,7 @@ export class RecipeService {
   recipeDoc: AngularFirestoreDocument<Recipe>;
   recipes: Observable<Recipe[]>;
 
-  constructor(public afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore, private storage: AngularFireStorage) {
     this.recipesCollection = this.afs.collection('recipes');
     // .snapshotChanges() returns a DocumentChangeAction[], which contains
     // a lot of information about "what happened" with each change. If you want to
@@ -48,8 +49,16 @@ export class RecipeService {
     return this.recipeDoc.valueChanges();
   }
 
-  addRecipe(recipe:Recipe){
-    return this.recipesCollection.add(recipe);
+  getRecipeId(){
+    return this.recipesCollection.ref.doc().id;
+  }
+
+  uploadPhoto(photo:File, filePath: string){
+    return this.storage.upload(filePath, photo);
+  }
+
+  addRecipe(recipe:Recipe, recipeId: string){
+    return this.recipesCollection.doc(recipeId).set(recipe);
   }
 
   updateRecipe(id:string, recipe:Recipe) {
