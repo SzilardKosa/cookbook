@@ -10,7 +10,7 @@ export interface Recipe {
   date: any,
   uid: string,
   photoURL: string,
-  categories?: Category,
+  categories: Category,
   id?: string,
   ratings?: Object
 }
@@ -28,10 +28,10 @@ export interface Step {
 }
 
 export interface Category {
-  course: string[],
-  cuisine: string[],
-  occasion: string[],
-  special_diets: string[],
+  courses: string[],
+  occasions: string[],
+  cuisines: string[],
+  specialDiets: string[],
 }
 
 // export enum Price {

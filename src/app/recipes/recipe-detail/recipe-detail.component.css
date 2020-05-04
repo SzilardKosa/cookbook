@@ -237,19 +237,18 @@
 /* Categories */
 
 .cb-categories {
+  margin-top: 32px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .cb-category{
-  background: darkred;
-  border-radius: 1.5rem;
-  font-weight: 600;
-  height: 3rem;
-  padding: 0 1rem;
-  margin: 0 .5rem;
-  color: lightcoral;
+  padding: 10px 16px;
+  border-radius: 25px;
+  margin: 0 15px 15px 15px;
+
+  font-size: 15px;
 
   display: flex;
   justify-content: center;
@@ -257,5 +256,44 @@
 }
 
 .cb-category:hover {
-  box-shadow: gray 0 0 10px;
+  cursor: pointer;
+}
+
+.cb-close{
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-left: 10px;
+  line-height: 1;
+}
+
+.cb-course {
+  background: #c03d5a;
+  color: white;
+}
+.cb-course:hover {
+  background: #993148;
+}
+
+.cb-occasion {
+  background: #119DA4;
+  color: white;
+}
+.cb-occasion:hover {
+  background: #0C747A;
+}
+
+.cb-cuisine {
+  background: #19647E;
+  color: white;
+}
+.cb-cuisine:hover {
+  background: #124962;
+}
+
+.cb-special {
+  background: #FFC857;
+  color: black;
+}
+.cb-special:hover {
+  background: #D5A046;
 }

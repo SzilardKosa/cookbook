@@ -24,7 +24,6 @@ export class RecipeDetailComponent implements OnInit {
   currentRecipe: Recipe;
   user$: Observable<User>;
   private currentUser: User;
-  testCategories: string[] = ["Main Course", "Lunch", "Thanksgiving", "Italian"];
   ratingLabel:string = "0 (0)";
   myRatingControl = new FormControl('');
   

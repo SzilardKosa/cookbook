@@ -11,6 +11,7 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
 import { StarRatingModule } from 'angular-star-rating';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { UploadSuccessModalComponent } from './upload-success-modal/upload-success-modal.component';
 
 
 @NgModule({
@@ -26,8 +27,9 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     RecipeListComponent,
     RecipeDetailComponent,
     AddRecipeComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    UploadSuccessModalComponent
   ],
-  entryComponents: [ConfirmModalComponent]
+  entryComponents: [ConfirmModalComponent, UploadSuccessModalComponent]
 })
 export class RecipesModule { }

@@ -7,6 +7,8 @@ import { RecipeService } from '../../services/recipe.service';
 import { AuthService } from '../../services/auth.service';
 import { Recipe } from '../../models/recipe';
 import { User } from 'src/app/models/user';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UploadSuccessModalComponent } from '../upload-success-modal/upload-success-modal.component';
 
 @Component({
   selector: 'app-add-recipe',
@@ -14,6 +16,19 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./add-recipe.component.css']
 })
 export class AddRecipeComponent implements OnInit {
+  readonly courses: string[] =
+  ['Breakfast', 'Lunch', 'Dinner', 'Starters', 'Soup', 'Main Course', 'Side Dish', 'Dessert',
+  'Snacks', 'Drinks'];
+  selectedCourses: string[] = [];
+  readonly occasions: string[] = ['Party', 'Date Night', 'Easter', 'Thanksgiving', 'Christmas'];
+  selectedOccasions: string[] = [];
+  readonly cuisines: string[] =
+  ['American', 'British', 'Chinese', 'French', 'Hungarian', 'Indian', 'Italian', 'Japanese',
+  'Mexican', 'Middle Eastern', 'Spanish'];
+  selectedCuisines: string[] = [];
+  readonly specials: string[] = ['Vegetarian', 'Low-Carb', 'Dairy-Free', 'Gluten-Free'];
+  selectedSpecials: string[] = [];
+
   user: User;
   photo: File;
   uploadPercent: Observable<number>;
@@ -38,26 +53,13 @@ export class AddRecipeComponent implements OnInit {
         time: [0, Validators.required],
         active: [true, Validators.required],
       })
-    ]),
-    // categories: this.fb.group({
-    //   course: this.fb.array([
-    //     this.fb.control('')
-    //   ]),
-    //   cuisine: this.fb.array([
-    //     this.fb.control('')
-    //   ]),
-    //   occasion: this.fb.array([
-    //     this.fb.control('')
-    //   ]),
-    //   specialDiets: this.fb.array([
-    //     this.fb.control('')
-    //   ])
-    // }),
+    ])
   });
 
   constructor(private fb: FormBuilder,
               public recipeService: RecipeService,
               public auth: AuthService,
+              private modalService: NgbModal
               ) { }
 
   ngOnInit() {
@@ -100,6 +102,50 @@ export class AddRecipeComponent implements OnInit {
     this.steps.removeAt(i);
   }
 
+  addCourse(event: any) {
+    if(this.selectedCourses.indexOf(event.target.value) === -1){
+      this.selectedCourses.push(event.target.value);
+    }
+    event.target.value = 'default';
+  }
+
+  removeCourse(course: string) {
+    this.selectedCourses = this.selectedCourses.filter(c => c !== course);
+  }
+
+  addOccasion(event: any) {
+    if(this.selectedOccasions.indexOf(event.target.value) === -1){
+      this.selectedOccasions.push(event.target.value);
+    }
+    event.target.value = 'default';
+  }
+
+  removeOccasion(occasion: string) {
+    this.selectedOccasions = this.selectedOccasions.filter(c => c !== occasion);
+  }
+
+  addCuisine(event: any) {
+    if(this.selectedCuisines.indexOf(event.target.value) === -1){
+      this.selectedCuisines.push(event.target.value);
+    }
+    event.target.value = 'default';
+  }
+
+  removeCuisine(cuisine: string) {
+    this.selectedCuisines = this.selectedCuisines.filter(c => c !== cuisine);
+  }
+
+  addSpecial(event: any) {
+    if(this.selectedSpecials.indexOf(event.target.value) === -1){
+      this.selectedSpecials.push(event.target.value);
+    }
+    event.target.value = 'default';
+  }
+
+  removeSpecial(special: string) {
+    this.selectedSpecials = this.selectedSpecials.filter(c => c !== special);
+  }
+
   changeFile(event: any) {
     const target = event.target;
     const file = target.files[0];
@@ -121,6 +167,9 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.photo){
+      return alert('Please upload a photo!');
+    }
     const recipeId = this.recipeService.getRecipeId();
     console.log(recipeId);
     console.log(this.photo);
@@ -151,15 +200,52 @@ export class AddRecipeComponent implements OnInit {
     newRecipe.date = new Date();
     newRecipe.uid = this.user.uid,
     newRecipe.photoURL = photoURL;
+    newRecipe.categories =  {
+      courses: this.selectedCourses,
+      occasions: this.selectedOccasions,
+      cuisines: this.selectedCuisines,
+      specialDiets: this.selectedSpecials
+    };
 
     console.log(newRecipe);
 
     this.recipeService.addRecipe(newRecipe, recipeId)
     .then(response => {
-      console.log(response)
+      console.log(response);
+      this.showSuccess();
     })
     .catch(error => {
       console.log(error)
     });
+  }
+
+  showSuccess(){
+    this.modalService.open(UploadSuccessModalComponent, {backdrop: 'static'}).result.then((result) =>{
+      console.log("OK");
+      this.clearForm();
+    }, (reason) => {
+      console.log("Cancel");
+    })
+  }
+
+  clearForm(){
+    this.photo = null;
+    this.imagePreview = "https://bulma.io/images/placeholders/640x320.png";
+    this.recipeForm.patchValue({
+      name: '',
+      description: '',
+      serves: 1,
+      time: 15,
+      price: 'Average',
+      difficulty: 'Medium'
+    });
+    this.ingredients.clear();
+    this.addIngredient();
+    this.steps.clear();
+    this.addStep();
+    this.selectedCourses = [];
+    this.selectedCuisines = [];
+    this.selectedOccasions = [];
+    this.selectedSpecials = [];
   }
 }

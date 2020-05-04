@@ -156,9 +156,17 @@
   <div class="row">
     <!-- Categories -->
     <div class="col-12 mt-4 mb-4 cb-categories">
-      <h3 class="mt-2 pt-1">Categories</h3>
-      <div *ngFor="let categorie of testCategories" class="cb-category mt-2 mb-0">
-        {{categorie}}
+      <div *ngFor="let course of recipe.categories.courses" class="cb-category cb-course">
+        {{course}}
+      </div>
+      <div *ngFor="let occasion of recipe.categories.occasions" class="cb-category cb-occasion">
+        {{occasion}}
+      </div>
+      <div *ngFor="let cuisine of recipe.categories.cuisines" class="cb-category cb-cuisine">
+        {{cuisine}}
+      </div>
+      <div *ngFor="let special of recipe.categories.specialDiets" class="cb-category cb-special">
+        {{special}}
       </div>
     </div>
 
