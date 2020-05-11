@@ -1,0 +1,153 @@
+/* Flexible grid layout */
+.cb-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cb-li {
+  width: 61rem;
+  height: 10rem;
+  margin-bottom: 0.5rem;
+  transition: .3s ease;
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.cb-li:hover {
+  box-shadow: gray 0 0 20px;
+}
+
+/* Image Section */
+.cb-li-img {
+  height: 100%;
+  width: 15rem;
+  flex-shrink: 0;
+}
+
+.cb-img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1rem;
+  height: 100%;
+}
+
+/* Circle buttons */
+.cb-circle-button{
+  position: relative;
+  float: right;
+  z-index: 2;
+  background-color: black;
+  border-radius: 50%;
+  transition: .2s ease;
+  margin-left: 20px;
+}
+
+.cb-circle-button a{
+  color: lightcoral;
+  display: table-cell;
+  vertical-align: middle; 
+  text-align: center;
+  text-decoration: none;
+  height: 40px;
+  width: 40px;
+  transition: .2s ease;
+}
+
+.cb-circle-button a:hover,.cb-circle-button a:active{
+  color: black;
+  text-decoration: none;
+}
+
+.cb-circle-button:hover{
+  background-color: lightcoral;
+}
+
+
+/* Title Section */
+.cb-li-main {
+  height: 100%;
+  flex-grow: 1;
+  padding: 0.5rem;
+}
+
+/* Stretched link style */
+.stretched-link {
+  text-decoration: none;
+  color: #212529;
+}
+
+
+/* Stats Section */
+.cb-li-stats {
+  height: 100%;
+  width: 15rem;
+  flex-shrink: 0;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 0;
+}
+
+.cb-li-stat {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 0;
+}
+
+.cb-stats-icon {
+  font-size: 1.6rem;
+}
+
+.cb-stats-icon, .cb-stats-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cb-stats-value {
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: flex-start;
+}
+
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+  .cb-li {
+    width: 40.5rem;
+    height: 10rem;
+  }
+  .cb-li-stats {
+    display: none;
+  }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+  .cb-li {
+    width: 100%;
+    height: 10rem;
+  }
+
+  .cb-li-img {
+    width: 10rem;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  
+}
+
+

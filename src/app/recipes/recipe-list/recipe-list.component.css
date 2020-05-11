@@ -1,0 +1,71 @@
+/* Sidebar */
+#sidebar-wrapper {
+  z-index: 1;
+  position: absolute;
+  width: 0;
+  overflow-y: hidden;
+  background: lightgray;
+  height: calc(100% - 60px - 3.5rem);
+}
+
+/* List */
+#list-wrapper {
+  margin-bottom: 2rem;
+}
+
+/* Change with of sidebar from 0 to 250px */
+#search-wrapper.sidebarDisplayed #sidebar-wrapper {
+  width: 500px;
+}
+
+/* Since we added left padding, we need to shrink the width by 250px */
+#search-wrapper.sidebarDisplayed #list-wrapper {
+  padding-left: 500px;
+}
+
+
+/* List options */
+.cb-list-settings {
+  padding: 0;
+  max-width: 976px;
+  margin: 1rem 0;
+}
+
+.cb-hr {
+  padding: 0;
+  max-width: 976px;
+  margin-bottom: 2rem;
+}
+
+hr{
+  padding: 0px;
+  margin: 0px;    
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+  .cb-list-settings {
+    max-width: 648px;
+  }
+  .cb-hr {
+    max-width: 648px;
+  }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+  .cb-list-settings {
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+  .cb-hr {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+
+}

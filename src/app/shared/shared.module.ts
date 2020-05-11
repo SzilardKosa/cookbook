@@ -8,6 +8,7 @@ import { CircleButtonComponent } from './circle-button/circle-button.component';
 import { RecipeCardsComponent } from './recipe-cards/recipe-cards.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { RecipeListviewComponent } from './recipe-listview/recipe-listview.component';
 
 
 
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     RecipeCardsComponent,
     RegisterComponent,
     LoginComponent,
+    RecipeListviewComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { LoginComponent } from './login/login.component';
     RecipeCardsComponent,
     RegisterComponent,
     LoginComponent,
+    RecipeListviewComponent,
   ],
   entryComponents: [RegisterComponent, LoginComponent]
 })

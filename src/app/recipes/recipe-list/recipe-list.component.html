@@ -1,8 +1,62 @@
-<div class="container">
-  <div class="row">
-    <h3 style="margin-left: 5rem;">Recipes list</h3>
-  </div>
+<div id="search-wrapper" #searchWrapper>
 
-  <app-recipe-cards [recipes]="recipes"></app-recipe-cards>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Filter options</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Recipe List -->
+  <div id="list-wrapper">
+    <div class="container">
+      <!-- List options -->
+      <div class="row justify-content-center">
+        <div class="col-12 cb-list-settings d-flex">
+    
+          <button class="btn btn-primary mr-auto" (click)="toggleSidebar()">
+            <i class="fas fa-plus"></i> Refine
+          </button>
+    
+          <div class="col-auto">
+            <select class="form-control">
+              <option>ABC order</option>
+              <option>Newest</option>
+            </select>
+          </div>
+    
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="listState">
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="0">
+              <i class="fas fa-th"></i>
+            </label>
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="1">
+              <i class="fas fa-th-list"></i>
+            </label>
+          </div>
+          
+        </div>
+        <div class="col-12 cb-hr">
+          <hr>
+        </div>
+      </div>
+      
+      <!-- List -->
+      <div *ngIf="listState===0; then gridView else listView"></div>
+      <ng-template #gridView>
+        <app-recipe-cards [recipes]="recipes" ></app-recipe-cards>
+      </ng-template>
+      <ng-template #listView>
+        <app-recipe-listview [recipes]="recipes"></app-recipe-listview>
+      </ng-template>
+      
+    
+    </div>
+  </div>
 
 </div>

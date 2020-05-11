@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
 
+enum ListState {Grid, List}
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,7 +10,10 @@ import { Recipe } from '../../models/recipe';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  @ViewChild('searchWrapper', {static: false}) searchWrapper: ElementRef;
   recipes: Recipe[];
+  listState: ListState = ListState.Grid;
+
 
   constructor(private recipeService: RecipeService) { }
 
@@ -18,6 +22,18 @@ export class RecipeListComponent implements OnInit {
       console.log(recipes);
       this.recipes = recipes;
     })
+  }
+
+  toggleSidebar() {
+    this.searchWrapper.nativeElement.classList.toggle('sidebarDisplayed');
+  }
+  
+  hideSidebar() {
+    this.searchWrapper.nativeElement.classList.remove('sidebarDisplayed');
+  }
+
+  toggleListGrid(){
+    console.log(this.listState);
   }
 
 }

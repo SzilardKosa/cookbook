@@ -13,6 +13,8 @@ import { StarRatingModule } from 'angular-star-rating';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { UploadSuccessModalComponent } from './upload-success-modal/upload-success-modal.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { UploadSuccessModalComponent } from './upload-success-modal/upload-succe
     ReactiveFormsModule,
     FormsModule,
     StarRatingModule.forRoot(),
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   declarations: [
     RecipeListComponent,
