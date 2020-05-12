@@ -9,6 +9,7 @@ import { RecipeCardsComponent } from './recipe-cards/recipe-cards.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeListviewComponent } from './recipe-listview/recipe-listview.component';
+import { CategorySelectorComponent } from './category-selector/category-selector.component';
 
 
 
@@ -19,6 +20,7 @@ import { RecipeListviewComponent } from './recipe-listview/recipe-listview.compo
     RegisterComponent,
     LoginComponent,
     RecipeListviewComponent,
+    CategorySelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { RecipeListviewComponent } from './recipe-listview/recipe-listview.compo
     RegisterComponent,
     LoginComponent,
     RecipeListviewComponent,
+    CategorySelectorComponent
   ],
   entryComponents: [RegisterComponent, LoginComponent]
 })

@@ -19,6 +19,7 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
+  objectKeys = Object.keys;
   recipe$: Observable<Recipe>;
   recipeID: string;
   currentRecipe: Recipe;

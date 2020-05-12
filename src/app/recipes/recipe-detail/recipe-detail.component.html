@@ -156,16 +156,16 @@
   <div class="row">
     <!-- Categories -->
     <div class="col-12 mt-4 mb-4 cb-categories">
-      <div *ngFor="let course of recipe.categories.courses" class="cb-category cb-course">
+      <div *ngFor="let course of objectKeys(recipe.categories.courses)" class="cb-category cb-course">
         {{course}}
       </div>
-      <div *ngFor="let occasion of recipe.categories.occasions" class="cb-category cb-occasion">
+      <div *ngFor="let occasion of objectKeys(recipe.categories.occasions)" class="cb-category cb-occasion">
         {{occasion}}
       </div>
-      <div *ngFor="let cuisine of recipe.categories.cuisines" class="cb-category cb-cuisine">
+      <div *ngFor="let cuisine of objectKeys(recipe.categories.cuisines)" class="cb-category cb-cuisine">
         {{cuisine}}
       </div>
-      <div *ngFor="let special of recipe.categories.specialDiets" class="cb-category cb-special">
+      <div *ngFor="let special of objectKeys(recipe.categories.specialDiets)" class="cb-category cb-special">
         {{special}}
       </div>
     </div>

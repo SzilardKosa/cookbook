@@ -16,17 +16,9 @@ import { UploadSuccessModalComponent } from '../upload-success-modal/upload-succ
   styleUrls: ['./add-recipe.component.css']
 })
 export class AddRecipeComponent implements OnInit {
-  readonly courses: string[] =
-  ['Breakfast', 'Lunch', 'Dinner', 'Starters', 'Soup', 'Main Course', 'Side Dish', 'Dessert',
-  'Snacks', 'Drinks'];
   selectedCourses: string[] = [];
-  readonly occasions: string[] = ['Party', 'Date Night', 'Easter', 'Thanksgiving', 'Christmas'];
   selectedOccasions: string[] = [];
-  readonly cuisines: string[] =
-  ['American', 'British', 'Chinese', 'French', 'Hungarian', 'Indian', 'Italian', 'Japanese',
-  'Mexican', 'Middle Eastern', 'Spanish'];
   selectedCuisines: string[] = [];
-  readonly specials: string[] = ['Vegetarian', 'Low-Carb', 'Dairy-Free', 'Gluten-Free'];
   selectedSpecials: string[] = [];
 
   user: User;
@@ -102,50 +94,6 @@ export class AddRecipeComponent implements OnInit {
     this.steps.removeAt(i);
   }
 
-  addCourse(event: any) {
-    if(this.selectedCourses.indexOf(event.target.value) === -1){
-      this.selectedCourses.push(event.target.value);
-    }
-    event.target.value = 'default';
-  }
-
-  removeCourse(course: string) {
-    this.selectedCourses = this.selectedCourses.filter(c => c !== course);
-  }
-
-  addOccasion(event: any) {
-    if(this.selectedOccasions.indexOf(event.target.value) === -1){
-      this.selectedOccasions.push(event.target.value);
-    }
-    event.target.value = 'default';
-  }
-
-  removeOccasion(occasion: string) {
-    this.selectedOccasions = this.selectedOccasions.filter(c => c !== occasion);
-  }
-
-  addCuisine(event: any) {
-    if(this.selectedCuisines.indexOf(event.target.value) === -1){
-      this.selectedCuisines.push(event.target.value);
-    }
-    event.target.value = 'default';
-  }
-
-  removeCuisine(cuisine: string) {
-    this.selectedCuisines = this.selectedCuisines.filter(c => c !== cuisine);
-  }
-
-  addSpecial(event: any) {
-    if(this.selectedSpecials.indexOf(event.target.value) === -1){
-      this.selectedSpecials.push(event.target.value);
-    }
-    event.target.value = 'default';
-  }
-
-  removeSpecial(special: string) {
-    this.selectedSpecials = this.selectedSpecials.filter(c => c !== special);
-  }
-
   changeFile(event: any) {
     const target = event.target;
     const file = target.files[0];
@@ -201,10 +149,10 @@ export class AddRecipeComponent implements OnInit {
     newRecipe.uid = this.user.uid,
     newRecipe.photoURL = photoURL;
     newRecipe.categories =  {
-      courses: this.selectedCourses,
-      occasions: this.selectedOccasions,
-      cuisines: this.selectedCuisines,
-      specialDiets: this.selectedSpecials
+      courses: this.selectedCourses.reduce( (acc, current) => {acc[current] = true; return acc;}, {}),
+      occasions: this.selectedOccasions.reduce( (acc, current) => {acc[current] = true; return acc;}, {}),
+      cuisines: this.selectedCuisines.reduce( (acc, current) => {acc[current] = true; return acc;}, {}),
+      specialDiets: this.selectedSpecials.reduce( (acc, current) => {acc[current] = true; return acc;}, {})
     };
 
     console.log(newRecipe);

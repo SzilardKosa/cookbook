@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Recipe } from '../models/recipe';
+import { Recipe, Category } from '../models/recipe';
 import { firestore } from 'firebase/app';
 
 @Injectable({
@@ -15,7 +15,15 @@ export class RecipeService {
   recipes: Observable<Recipe[]>;
 
   constructor(public afs: AngularFirestore, private storage: AngularFireStorage) {
-    this.recipesCollection = this.afs.collection('recipes');
+    const testQuery = [];
+    this.recipesCollection = this.afs.collection('recipes', ref => {
+      let query:firestore.Query<firestore.DocumentData> = ref.limit(10);
+      testQuery.forEach(q=>{
+        query = query.where(`categories.all.${q}`,'==', true);
+      })
+      return query.limit(2);//.orderBy(firestore.FieldPath.documentId()).startAfter('64u1U89L8mKq1rIifGyt');
+    }
+    );
     // .snapshotChanges() returns a DocumentChangeAction[], which contains
     // a lot of information about "what happened" with each change. If you want to
     // get the data and the id use the map operator.

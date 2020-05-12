@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-6 col-md-3">
+    <div class="form-group">
+      <label for="course">Course</label>
+      <select class="form-control" id="course" (change)="addCourse($event)" >
+        <option selected value="default">Add more...</option>
+        <option *ngFor="let course of courses" [value]="course"> {{course}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-6 col-md-9">
+    <div class="cb-categories">
+      <div *ngFor="let course of selectedCourses" class="cb-category cb-course"
+           (click)="removeCourse(course)">
+        <div>{{course}}</div>
+        <span class="cb-close">&times;</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-6 col-md-3">
+    <div class="form-group">
+      <label for="occasion">Occasion</label>
+      <select class="form-control" id="occasion" (change)="addOccasion($event)" >
+        <option selected value="default">Add more...</option>
+        <option *ngFor="let occasion of occasions" [value]="occasion"> {{occasion}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-6 col-md-9">
+    <div class="cb-categories">
+      <div *ngFor="let occasion of selectedOccasions" class="cb-category cb-occasion"
+           (click)="removeOccasion(occasion)">
+        <div>{{occasion}}</div>
+        <span class="cb-close">&times;</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-6 col-md-3">
+    <div class="form-group">
+      <label for="cuisine">Cuisine</label>
+      <select class="form-control" id="cuisine" (change)="addCuisine($event)" >
+        <option selected value="default">Add more...</option>
+        <option *ngFor="let cuisine of cuisines" [value]="cuisine"> {{cuisine}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-6 col-md-9">
+    <div class="cb-categories">
+      <div *ngFor="let cuisine of selectedCuisines" class="cb-category cb-cuisine"
+           (click)="removeCuisine(cuisine)">
+        <div>{{cuisine}}</div>
+        <span class="cb-close">&times;</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-6 col-md-3">
+    <div class="form-group">
+      <label for="special">Special</label>
+      <select class="form-control" id="special" (change)="addSpecial($event)" >
+        <option selected value="default">Add more...</option>
+        <option *ngFor="let special of specials" [value]="special"> {{special}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-6 col-md-9">
+    <div class="cb-categories">
+      <div *ngFor="let special of selectedSpecials" class="cb-category cb-special"
+           (click)="removeSpecial(special)">
+        <div>{{special}}</div>
+        <span class="cb-close">&times;</span>
+      </div>
+    </div>
+  </div>
+</div>

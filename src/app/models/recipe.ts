@@ -28,10 +28,10 @@ export interface Step {
 }
 
 export interface Category {
-  courses: string[],
-  occasions: string[],
-  cuisines: string[],
-  specialDiets: string[],
+  courses: {},
+  occasions: {},
+  cuisines: {},
+  specialDiets: {},
 }
 
 // export enum Price {
