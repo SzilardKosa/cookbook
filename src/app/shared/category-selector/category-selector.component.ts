@@ -27,6 +27,8 @@ export class CategorySelectorComponent implements OnInit {
   @Input() selectedSpecials: string[];
   @Output() selectedSpecialsChange = new EventEmitter();
 
+  @Output() categoryChange = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -37,12 +39,14 @@ export class CategorySelectorComponent implements OnInit {
     if(this.selectedCourses.indexOf(event.target.value) === -1){
       this.selectedCourses.push(event.target.value);
       this.selectedCoursesChange.emit(this.selectedCourses);
+      this.categoryChange.emit();
     }
     event.target.value = 'default';
   }
   removeCourse(course: string) {
     this.selectedCourses = this.selectedCourses.filter(c => c !== course);
     this.selectedCoursesChange.emit(this.selectedCourses);
+    this.categoryChange.emit();
   }
 
   // Occasion
@@ -50,12 +54,14 @@ export class CategorySelectorComponent implements OnInit {
     if(this.selectedOccasions.indexOf(event.target.value) === -1){
       this.selectedOccasions.push(event.target.value);
       this.selectedOccasionsChange.emit(this.selectedOccasions);
+      this.categoryChange.emit();
     }
     event.target.value = 'default';
   }
   removeOccasion(occasion: string) {
     this.selectedOccasions = this.selectedOccasions.filter(c => c !== occasion);
     this.selectedOccasionsChange.emit(this.selectedOccasions);
+    this.categoryChange.emit();
   }
 
   // Cuisine
@@ -63,12 +69,14 @@ export class CategorySelectorComponent implements OnInit {
     if(this.selectedCuisines.indexOf(event.target.value) === -1){
       this.selectedCuisines.push(event.target.value);
       this.selectedCuisinesChange.emit(this.selectedCuisines);
+      this.categoryChange.emit();
     }
     event.target.value = 'default';
   }
   removeCuisine(cuisine: string) {
     this.selectedCuisines = this.selectedCuisines.filter(c => c !== cuisine);
     this.selectedCuisinesChange.emit(this.selectedCuisines);
+    this.categoryChange.emit();
   }
 
   // Special
@@ -76,12 +84,14 @@ export class CategorySelectorComponent implements OnInit {
     if(this.selectedSpecials.indexOf(event.target.value) === -1){
       this.selectedSpecials.push(event.target.value);
       this.selectedSpecialsChange.emit(this.selectedSpecials);
+      this.categoryChange.emit();
     }
     event.target.value = 'default';
   }
   removeSpecial(special: string) {
     this.selectedSpecials = this.selectedSpecials.filter(c => c !== special);
     this.selectedSpecialsChange.emit(this.selectedSpecials);
+    this.categoryChange.emit();
   }
 
 }

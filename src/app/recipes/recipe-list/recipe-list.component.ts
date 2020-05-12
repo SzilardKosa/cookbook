@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
+import { Category } from '../../models/filter';
 
 enum ListState {Grid, List}
 
@@ -13,7 +14,12 @@ export class RecipeListComponent implements OnInit {
   @ViewChild('searchWrapper', {static: false}) searchWrapper: ElementRef;
   recipes: Recipe[];
   listState: ListState = ListState.Grid;
-
+  filter: Category = {
+    courses: [],
+    cuisines: [],
+    occasions: [],
+    specialDiets: []
+  };
 
   constructor(private recipeService: RecipeService) { }
 
@@ -22,6 +28,11 @@ export class RecipeListComponent implements OnInit {
       console.log(recipes);
       this.recipes = recipes;
     })
+  }
+
+  updateFilter(){
+    console.log(this.filter);
+    this.recipeService.updateFilter(this.filter);
   }
 
   toggleSidebar() {

@@ -7,6 +7,12 @@
         <div class="col-12">
           <h3>Filter options</h3>
         </div>
+        <app-category-selector  class="col-12" (categoryChange) = "updateFilter()"
+                                [(selectedCourses)]="filter.courses" 
+                                [(selectedCuisines)]="filter.cuisines"
+                                [(selectedOccasions)]="filter.occasions"
+                                [(selectedSpecials)]="filter.specialDiets">
+        </app-category-selector>
       </div>
     </div>
   </div>

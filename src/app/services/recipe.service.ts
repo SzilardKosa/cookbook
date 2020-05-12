@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Recipe, Category } from '../models/recipe';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Recipe } from '../models/recipe';
+import { Category } from '../models/filter';
 import { firestore } from 'firebase/app';
 
 @Injectable({
@@ -12,32 +13,54 @@ import { firestore } from 'firebase/app';
 export class RecipeService {
   recipesCollection: AngularFirestoreCollection<Recipe>;
   recipeDoc: AngularFirestoreDocument<Recipe>;
-  recipes: Observable<Recipe[]>;
+  recipes$: Observable<Recipe[]>;
+  filter$: BehaviorSubject<Category>;
 
   constructor(public afs: AngularFirestore, private storage: AngularFireStorage) {
-    const testQuery = [];
-    this.recipesCollection = this.afs.collection('recipes', ref => {
-      let query:firestore.Query<firestore.DocumentData> = ref.limit(10);
-      testQuery.forEach(q=>{
-        query = query.where(`categories.all.${q}`,'==', true);
-      })
-      return query.limit(2);//.orderBy(firestore.FieldPath.documentId()).startAfter('64u1U89L8mKq1rIifGyt');
-    }
-    );
-    // .snapshotChanges() returns a DocumentChangeAction[], which contains
-    // a lot of information about "what happened" with each change. If you want to
-    // get the data and the id use the map operator.
-    this.recipes = this.recipesCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Recipe;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
+    this.recipesCollection = this.afs.collection('recipes');
+
+    this.filter$ = new BehaviorSubject({
+      courses: [],
+      cuisines: [],
+      occasions: [],
+      specialDiets: []
+    });
+
+    this.recipes$ = this.filter$.pipe(
+      switchMap(categories =>
+        this.afs.collection('recipes', ref => {
+          let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+          categories.courses.forEach(q=>{
+            query = query.where(`categories.courses.${q}`,'==', true);
+          })
+          categories.occasions.forEach(q=>{
+            query = query.where(`categories.occasions.${q}`,'==', true);
+          })
+          categories.cuisines.forEach(q=>{
+            query = query.where(`categories.cuisines.${q}`,'==', true);
+          })
+          categories.specialDiets.forEach(q=>{
+            query = query.where(`categories.specialDiets.${q}`,'==', true);
+          })
+          return query.orderBy(firestore.FieldPath.documentId());//.startAfter('64u1U89L8mKq1rIifGyt');
+        }).snapshotChanges().pipe(
+          map(actions => actions.map(a => {
+            const data = a.payload.doc.data() as Recipe;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          }))
+        )
+      )
+    )
+
+  }
+
+  updateFilter(filter: Category) {
+    this.filter$.next(filter);
   }
 
   getRecipes():Observable<Recipe[]>{
-    return this.recipes;
+    return this.recipes$;
   }
 
   getFavorites(ids: string[]){
