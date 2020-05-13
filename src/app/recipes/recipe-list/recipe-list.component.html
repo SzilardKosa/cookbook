@@ -35,13 +35,14 @@
             </select>
           </div>
     
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="listState">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+               [(ngModel)]="listState" (change)="updateListState()">
             <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" [value]="0">
+              <input ngbButton type="radio" [value]="1">
               <i class="fas fa-th"></i>
             </label>
             <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" [value]="1">
+              <input ngbButton type="radio" [value]="2">
               <i class="fas fa-th-list"></i>
             </label>
           </div>
@@ -53,14 +54,27 @@
       </div>
       
       <!-- List -->
-      <div *ngIf="listState===0; then gridView else listView"></div>
+      <div *ngIf="listState===1; then gridView else listView"></div>
       <ng-template #gridView>
         <app-recipe-cards [recipes]="recipes" ></app-recipe-cards>
       </ng-template>
       <ng-template #listView>
         <app-recipe-listview [recipes]="recipes"></app-recipe-listview>
       </ng-template>
-      
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 *ngIf="noResult">
+            No Result Found
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <app-loading-spinner *ngIf="!endOfList && !noResult"></app-loading-spinner>      
+        </div>
+      </div>
     
     </div>
   </div>

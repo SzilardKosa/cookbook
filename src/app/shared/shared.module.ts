@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeListviewComponent } from './recipe-listview/recipe-listview.component';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 
@@ -21,6 +22,7 @@ import { CategorySelectorComponent } from './category-selector/category-selector
     LoginComponent,
     RecipeListviewComponent,
     CategorySelectorComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { CategorySelectorComponent } from './category-selector/category-selector
     RegisterComponent,
     LoginComponent,
     RecipeListviewComponent,
-    CategorySelectorComponent
+    CategorySelectorComponent,
+    LoadingSpinnerComponent
   ],
   entryComponents: [RegisterComponent, LoginComponent]
 })

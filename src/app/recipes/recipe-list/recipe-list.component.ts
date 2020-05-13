@@ -4,8 +4,6 @@ import { Recipe } from '../../models/recipe';
 import { Category } from '../../models/filter';
 import { take } from 'rxjs/operators';
 
-enum ListState {Grid, List}
-
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -14,8 +12,10 @@ enum ListState {Grid, List}
 export class RecipeListComponent implements OnInit {
   @ViewChild('searchWrapper', {static: false}) searchWrapper: ElementRef;
   recipes: Recipe[];
-  listState: ListState = ListState.Grid;
+  listState: number;
   sidebarDisplayed: boolean = false;
+  noResult: boolean = false;
+  endOfList: boolean = false;
   filter: Category = {
     courses: [],
     cuisines: [],
@@ -35,25 +35,38 @@ export class RecipeListComponent implements OnInit {
     ){
       this.showSidebar();
     }
+    this.listState = this.recipeService.getListState();
     this.getFirstRecipes();
   }
 
   getFirstRecipes(){
+    this.endOfList = false;
     this.recipes = [];
     this.recipeService.getRecipes()
     .pipe(take(2)) // cache miatt
     .subscribe( recipes => {
       this.recipes = recipes;
+      if(recipes.length > 0){
+        this.noResult = false;
+      } else {
+        this.noResult = true;
+      }
+      if(recipes.length < 6){
+        this.endOfList = true;
+      }
     })
   }
 
   getNextRecipes(){
+    if (this.noResult || this.endOfList) return;
     this.recipeService.getRecipes(this.recipes[this.recipes.length - 1].id)
     .pipe(take(2)) // cache miatt
     .subscribe( recipes => {
-      console.log(recipes);
       this.recipes = this.recipes.concat(recipes);
-      console.log(this.recipes);
+      console.log(recipes);
+      if(recipes.length < 6){
+        this.endOfList = true;
+      }
     })
   }
 
@@ -78,6 +91,10 @@ export class RecipeListComponent implements OnInit {
   
   hideSidebar() {
     this.sidebarDisplayed = false;
+  }
+
+  updateListState(){
+    this.recipeService.updateListState(this.listState);
   }
 
 }

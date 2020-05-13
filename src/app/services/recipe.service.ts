@@ -13,6 +13,7 @@ import { firestore } from 'firebase/app';
 export class RecipeService {
   recipesCollection: AngularFirestoreCollection<Recipe>;
   filter: Category;
+  listState: number = 1;
 
   constructor(public afs: AngularFirestore, private storage: AngularFireStorage) {
     this.recipesCollection = this.afs.collection('recipes');
@@ -25,11 +26,19 @@ export class RecipeService {
     };
   }
 
+  updateListState(state:number){
+    this.listState = state;
+  }
+
+  getListState():number{
+    return this.listState
+  }
+
   updateFilter(filter: Category) {
     this.filter = filter;
   }
 
-  getFilter(){
+  getFilter():Category{
     return this.filter;
   }
 
