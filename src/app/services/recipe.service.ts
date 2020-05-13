@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Recipe } from '../models/recipe';
 import { Category } from '../models/filter';
 import { firestore } from 'firebase/app';
@@ -12,55 +12,47 @@ import { firestore } from 'firebase/app';
 })
 export class RecipeService {
   recipesCollection: AngularFirestoreCollection<Recipe>;
-  recipeDoc: AngularFirestoreDocument<Recipe>;
-  recipes$: Observable<Recipe[]>;
-  filter$: BehaviorSubject<Category>;
+  filter: Category;
 
   constructor(public afs: AngularFirestore, private storage: AngularFireStorage) {
     this.recipesCollection = this.afs.collection('recipes');
 
-    this.filter$ = new BehaviorSubject({
+    this.filter = {
       courses: [],
       cuisines: [],
       occasions: [],
       specialDiets: []
-    });
-
-    this.recipes$ = this.filter$.pipe(
-      switchMap(categories =>
-        this.afs.collection('recipes', ref => {
-          let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-          categories.courses.forEach(q=>{
-            query = query.where(`categories.courses.${q}`,'==', true);
-          })
-          categories.occasions.forEach(q=>{
-            query = query.where(`categories.occasions.${q}`,'==', true);
-          })
-          categories.cuisines.forEach(q=>{
-            query = query.where(`categories.cuisines.${q}`,'==', true);
-          })
-          categories.specialDiets.forEach(q=>{
-            query = query.where(`categories.specialDiets.${q}`,'==', true);
-          })
-          return query.orderBy(firestore.FieldPath.documentId());//.startAfter('64u1U89L8mKq1rIifGyt');
-        }).snapshotChanges().pipe(
-          map(actions => actions.map(a => {
-            const data = a.payload.doc.data() as Recipe;
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          }))
-        )
-      )
-    )
-
+    };
   }
 
   updateFilter(filter: Category) {
-    this.filter$.next(filter);
+    this.filter = filter;
   }
 
-  getRecipes():Observable<Recipe[]>{
-    return this.recipes$;
+  getFilter(){
+    return this.filter;
+  }
+
+  getRecipes(last?: string):Observable<Recipe[]>{
+    const filtered = this.afs.collection('recipes', ref => {
+      let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      Object.entries(this.filter).forEach(([key, value]) => {
+        value.forEach(q=>{
+          query = query.where(`categories.${key}.${q}`,'==', true);
+        })
+      });
+      if(last){
+        return query.orderBy(firestore.FieldPath.documentId()).limit(6).startAfter(last);
+      }
+      return query.orderBy(firestore.FieldPath.documentId()).limit(6);
+    });
+    return filtered.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Recipe;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    )
   }
 
   getFavorites(ids: string[]){
@@ -76,8 +68,8 @@ export class RecipeService {
   }
 
   getRecipe(id: string):Observable<Recipe>{
-    this.recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
-    return this.recipeDoc.valueChanges();
+    const recipeDoc = this.afs.doc<Recipe>(`recipes/${id}`);
+    return recipeDoc.valueChanges();
   }
 
   getRecipeId(){

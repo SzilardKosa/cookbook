@@ -9,6 +9,7 @@ import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StarRatingModule } from 'angular-star-rating';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { UploadSuccessModalComponent } from './upload-success-modal/upload-success-modal.component';
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     StarRatingModule.forRoot(),
     SharedModule,
-    NgbModule
+    NgbModule,
+    InfiniteScrollModule
   ],
   declarations: [
     RecipeListComponent,

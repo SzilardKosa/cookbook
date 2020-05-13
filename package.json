@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "css-star-rating": "^1.2.4",
     "firebase": "^7.9.3",
+    "ngx-infinite-scroll": "^8.0.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

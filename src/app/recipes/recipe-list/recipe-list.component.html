@@ -1,4 +1,4 @@
-<div id="search-wrapper" #searchWrapper>
+<div id="search-wrapper" [class.sidebarDisplayed]="sidebarDisplayed===true">
 
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
@@ -7,7 +7,7 @@
         <div class="col-12">
           <h3>Filter options</h3>
         </div>
-        <app-category-selector  class="col-12" (categoryChange) = "updateFilter()"
+        <app-category-selector  class="col-12" (categoryChange)="updateFilter()"
                                 [(selectedCourses)]="filter.courses" 
                                 [(selectedCuisines)]="filter.cuisines"
                                 [(selectedOccasions)]="filter.occasions"
@@ -63,6 +63,13 @@
       
     
     </div>
+  </div>
+
+  <div class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()">
   </div>
 
 </div>
