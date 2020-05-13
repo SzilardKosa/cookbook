@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -35,6 +35,7 @@ export class RecipeDetailComponent implements OnInit {
     private renderer: Renderer2,
     public auth: AuthService,
     private modalService: NgbModal,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -121,6 +122,22 @@ export class RecipeDetailComponent implements OnInit {
     const score = sumOfRatings/numberOfRatings;
     this.myRatingControl.setValue(score);
     this.ratingLabel = `${score} (${numberOfRatings})`;
+  }
+
+  onSearch(type: string, name: string){
+    let filter = {
+      courses: [],
+      cuisines: [],
+      occasions: [],
+      specialDiets: []
+    };
+    filter[type] = [name];
+    console.log(filter);
+    this.recipeService.updateFilter(filter);
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/recipes']);
   }
 
 }

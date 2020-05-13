@@ -18,11 +18,16 @@
       </ul>
 
       <!-- Search -->
-      <form class="form-inline mr-auto">
+      <form (ngSubmit)="onSearch()" class="form-inline mr-auto" id="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search...">
+          <input type="text" class="form-control" name="search" placeholder="Search..."
+                 [(ngModel)]="searchText"
+                 [ngbTypeahead]="search"
+                 [inputFormatter]="formatter"
+                 [resultFormatter]="formatter"
+                 [editable]='false' />
           <div class="input-group-append">
-            <button class="btn btn-secondary" type="button">
+            <button class="btn btn-secondary" type="submit" form="search">
               <i class="fa fa-search"></i>
             </button>
           </div>
