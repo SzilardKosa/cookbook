@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">You are not logged in!</h4>
+  <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>Log in to use this feature! If you don't have an account yet,
+     then consider creating one now by clicking the button below.</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" ngbAutofocus class="btn btn-primary" (click)="modal.close('login')">Login</button>
+  <button type="button" ngbAutofocus class="btn btn-primary" (click)="modal.close('register')">Register</button>
+</div>

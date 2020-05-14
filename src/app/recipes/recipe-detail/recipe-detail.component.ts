@@ -12,6 +12,9 @@ import { User } from '../../models/user';
 import { ClickEvent } from 'angular-star-rating/angular-star-rating';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { AdvertModalComponent } from 'src/app/shared/advert-modal/advert-modal.component';
+import { LoginComponent } from 'src/app/shared/login/login.component';
+import { RegisterComponent } from 'src/app/shared/register/register.component';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -71,7 +74,7 @@ export class RecipeDetailComponent implements OnInit {
 
   addRating($event: ClickEvent) {
     if (this.currentUser === null){
-      alert("You have to log in to rate recipes!");
+      this.showAdvert();
     } else {
       this.askConfirmation($event.rating);
     }
@@ -138,6 +141,26 @@ export class RecipeDetailComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/recipes']);
+  }
+
+  showAdvert(){
+    this.modalService.open(AdvertModalComponent, {backdrop: 'static'}).result.then((result) =>{
+      if(result === 'register'){
+        this.openReg();
+      } else if(result === 'login'){
+        this.openLogin();
+      }
+    }, (reason) => {
+      console.log('Cancel');
+    })
+  }
+
+  openLogin() {
+    this.modalService.open(LoginComponent,{backdrop: 'static'});
+  }
+
+  openReg() {
+    this.modalService.open(RegisterComponent,{backdrop: 'static'});
   }
 
 }

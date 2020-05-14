@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdvertModalComponent } from '../advert-modal/advert-modal.component';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-circle-button',
@@ -12,7 +16,10 @@ export class CircleButtonComponent implements OnInit {
   @Input() recipeId:string;
   user: User;
 
-  constructor( public auth: AuthService ) { }
+  constructor( 
+    public auth: AuthService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.getProfile();
@@ -24,7 +31,7 @@ export class CircleButtonComponent implements OnInit {
 
   updateFavorites(recipeId:string) {
     if (this.user === null){
-      alert("You have to log in to save favorite recipes!");
+      this.showAdvert();
     } else {
       this.saveFavorites(recipeId);
     }
@@ -55,6 +62,26 @@ export class CircleButtonComponent implements OnInit {
     if(typeof this.user === 'undefined') return false;
     if(typeof this.user.favorites === 'undefined') return false;
     return this.user.favorites.includes(recipeId);
+  }
+
+  showAdvert(){
+    this.modalService.open(AdvertModalComponent, {backdrop: 'static'}).result.then((result) =>{
+      if(result === 'register'){
+        this.openReg();
+      } else if(result === 'login'){
+        this.openLogin();
+      }
+    }, (reason) => {
+      console.log('Cancel');
+    })
+  }
+
+  openLogin() {
+    this.modalService.open(LoginComponent,{backdrop: 'static'});
+  }
+
+  openReg() {
+    this.modalService.open(RegisterComponent,{backdrop: 'static'});
   }
 
 }

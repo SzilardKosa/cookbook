@@ -48,11 +48,12 @@ export class AddRecipeComponent implements OnInit {
     ])
   });
 
-  constructor(private fb: FormBuilder,
-              public recipeService: RecipeService,
-              public auth: AuthService,
-              private modalService: NgbModal
-              ) { }
+  constructor(
+    private fb: FormBuilder,
+    public recipeService: RecipeService,
+    public auth: AuthService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.getProfile();

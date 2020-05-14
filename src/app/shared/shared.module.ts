@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { RecipeListviewComponent } from './recipe-listview/recipe-listview.component';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AdvertModalComponent } from './advert-modal/advert-modal.component';
 
 
 
@@ -23,6 +24,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     RecipeListviewComponent,
     CategorySelectorComponent,
     LoadingSpinnerComponent,
+    AdvertModalComponent,
   ],
   imports: [
     CommonModule,
@@ -37,8 +39,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     LoginComponent,
     RecipeListviewComponent,
     CategorySelectorComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AdvertModalComponent,
   ],
-  entryComponents: [RegisterComponent, LoginComponent]
+  entryComponents: [RegisterComponent, LoginComponent, AdvertModalComponent]
 })
 export class SharedModule { }
