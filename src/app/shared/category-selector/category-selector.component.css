@@ -1,3 +1,11 @@
+/* Selectors */
+.cb-selector {
+  display: grid;
+  grid-template-columns: 10rem auto;
+  grid-column-gap: 0;
+}
+
+
 /* Categories */
 
 .cb-categories {

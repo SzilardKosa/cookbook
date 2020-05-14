@@ -8,6 +8,7 @@ import { Recipe } from '../../models/recipe';
 })
 export class RecipeListviewComponent implements OnInit {
   @Input() recipes: Recipe[];
+  @Input() sidebarDisplayed: boolean;
 
   constructor() { }
 

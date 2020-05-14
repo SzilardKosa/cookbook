@@ -5,7 +5,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3>Filter options</h3>
+          <a class="closebtn" (click)="hideSidebar()">&times;</a>
+          <h3 class="display-4 cb-filter-title">Filter options</h3>
         </div>
         <app-category-selector  class="col-12" (categoryChange)="updateFilter()"
                                 [(selectedCourses)]="filter.courses" 
@@ -28,14 +29,14 @@
             <i class="fas fa-plus"></i> Refine
           </button>
     
-          <div class="col-auto">
+          <!-- <div class="col-auto">
             <select class="form-control">
               <option>ABC order</option>
               <option>Newest</option>
             </select>
-          </div>
+          </div> -->
     
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+          <div class="col-auto btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
                [(ngModel)]="listState" (change)="updateListState()">
             <label ngbButtonLabel class="btn-primary">
               <input ngbButton type="radio" [value]="1">
@@ -59,7 +60,7 @@
         <app-recipe-cards [recipes]="recipes" ></app-recipe-cards>
       </ng-template>
       <ng-template #listView>
-        <app-recipe-listview [recipes]="recipes"></app-recipe-listview>
+        <app-recipe-listview [recipes]="recipes" [sidebarDisplayed]="sidebarDisplayed"></app-recipe-listview>
       </ng-template>
 
       <div class="row">

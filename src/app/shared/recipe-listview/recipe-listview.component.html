@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [class.sidebarDisplayed]="sidebarDisplayed===true">
   <div *ngIf="recipes?.length > 0" class="cb-list col-12">
     <div *ngFor="let recipe of recipes" class="cb-li card">
 

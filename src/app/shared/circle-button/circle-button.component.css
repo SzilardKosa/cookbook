@@ -19,7 +19,7 @@
   width: 40px;
 }
 
-.cb-circle-button a:hover,.cb-circle-button a:active{
+.cb-circle-button a:hover{
   color: black;
   text-decoration: none;
   transition: .2s ease;

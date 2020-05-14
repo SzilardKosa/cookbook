@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: darkred">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(168, 0, 0)">
   <div class="container">
     
     <!-- Brand -->
@@ -20,7 +20,7 @@
       <!-- Search -->
       <form (ngSubmit)="onSearch()" class="form-inline mr-auto" id="search">
         <div class="input-group">
-          <input type="text" class="form-control" name="search" placeholder="Search..."
+          <input type="text" class="form-control" name="search" placeholder="Search for category"
                  [(ngModel)]="searchText"
                  [ngbTypeahead]="search"
                  [inputFormatter]="formatter"

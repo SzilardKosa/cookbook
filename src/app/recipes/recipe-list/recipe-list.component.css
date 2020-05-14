@@ -1,11 +1,30 @@
 /* Sidebar */
 #sidebar-wrapper {
-  z-index: 1;
+  z-index: 100;
   position: absolute;
   width: 0;
   overflow-y: auto;
   background: lightgray;
   height: calc(100% - 60px - 3.5rem);
+}
+
+/* Position and style the close button (top right corner) */
+.closebtn {
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 3rem;
+  margin-left: 50px;
+}
+
+.closebtn:hover {
+  cursor: pointer;
+  color: cornflowerblue;
+}
+
+.cb-filter-title {
+  margin: 1rem 0 2rem 0;
 }
 
 /* List */
@@ -25,6 +44,10 @@
 
 
 /* List options */
+.col-auto {
+  padding: 0;
+}
+
 .cb-list-settings {
   padding: 0;
   max-width: 976px;
@@ -65,7 +88,36 @@ hr{
   }
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
+/* FILTER VISIBLE */
+/* Break into two columns */
+@media (max-width: 1522.98px) {
+  .sidebarDisplayed .cb-list-settings {
+    max-width: 648px;
+  }
 
+  .sidebarDisplayed .cb-hr {
+    max-width: 648px;
+  }
+
+}
+/* Change to overlay */
+@media (max-width: 1199.98px) {
+  #search-wrapper.sidebarDisplayed #list-wrapper {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #sidebar-wrapper {
+    height: calc(100% - 56px - 3.5rem);
+  }
+}
+
+@media (max-width: 499.98px) {
+  #search-wrapper.sidebarDisplayed #sidebar-wrapper {
+    width: 100%;
+  }
+  .cb-filter-title {
+    font-size: 2.5rem;
+  }
 }
