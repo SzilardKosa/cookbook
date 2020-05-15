@@ -15,7 +15,8 @@
 
 .cb-soft-card {
   width: 100%;
-  margin: .5rem;
+  margin-right: 0;
+  margin-left: 0;
   padding: 1rem;
   border-radius: 2.5rem;
   background: #ecf0f3;
@@ -31,6 +32,7 @@
 }
 
 .cb-soft-img {
+  cursor: pointer;
   border-radius: 1rem;
   box-shadow: 
   /* logo shadow */
@@ -43,50 +45,82 @@
   -8px -8px 15px #ffffff
 }
 
-/* .cb-soft-field {
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.125rem;
-  color: #555;
-  padding: 1.25rem;
-  
-  margin-bottom: 1.875rem;
-  border-radius: 25px;
-  box-shadow: inset 8px 8px 8px #cbced1,
-              inset -8px -8px 8px #ffffff;
-} */
+#input-image {
+  display: none;
+}
 
 .cb-soft-btn {
   outline: none;
   border:none;
   cursor: pointer;
   width:100%;
-  height: 60px;
-  border-radius: 30px;
-  font-size: 20px;
-  font-weight: 700;
   font-family: 'Lato', sans-serif;
   color:#fff;
   text-align: center;
-  background: #24cfaa;
   box-shadow: 3px 3px 8px #b1b1b1,
               -3px -3px 8px #ffffff;
   transition: 0.5s;
 }
 
-.cb-soft-btn:hover {
+.cb-add-btn {
+  height: 50px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #2482cf;
+}
+
+.cb-add-btn:hover, .cb-add-btn:disabled {
+  background:#3f8bc9;
+}
+
+.cb-add-btn:active {
+  background:#1e68a5;
+}
+
+.cb-del-btn {
+  height: 38px;
+  border-radius: 19px;
+  font-size: 1rem;
+  font-weight: 400;
+  background: #cf2424;
+}
+
+.cb-del-btn:hover, .cb-del-btn:disabled {
+  background:#cc4646;
+}
+
+.cb-del-btn:active {
+  background:#a01b1b;
+}
+
+.cb-submit-btn {
+  height: 60px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  background: #24cfaa;
+}
+
+.cb-submit-btn:hover, .cb-submit-btn:disabled {
   background:#2fdbb6;
 }
 
-.cb-soft-btn:active {
+.cb-submit-btn:active {
   background:#1da88a;
 }
 
-.cb-soft-btn:disabled {
-  background:#2fdbb6;
+/* list items */
+.cb-soft-li {
+  border-radius: 1rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+  background: #ecf0f3;
+  box-shadow: 
+  8px 8px 15px #a7aaaf,
+  -8px -8px 15px #ffffff
 }
-
 
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px solid #42A948;
@@ -94,4 +128,10 @@
 
 .ng-invalid:not(form):not(div)  {
   border-left: 5px solid #a94442;
+}
+
+@media (max-width: 499.98px) {
+  .cb-title {
+    font-size: 2.5rem;
+  }
 }

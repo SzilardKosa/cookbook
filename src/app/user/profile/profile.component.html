@@ -1,32 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row text-center">
     <div class="col-12">
-        <h2>My Profile</h2>
+      <h3 class="display-4 my-4">Your Profile</h3>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <!-- Add picture -->
-      <div class="form-group">
-        <img class="img-thumbnail" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-        <input type="file" class="form-control-file border">
-        <button type="submit" class="btn btn-primary mt-2">Save picture</button>
+      <!-- USER INFO -->
+      <div class="row">
+        <label class="col-3 cb-right"><strong>Name:</strong></label>
+        <div class="col-9">
+          <p> {{user?.displayName}} </p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-3 cb-right"><strong>Email:</strong></label>
+        <div class="col-9">
+          <p> {{user?.email}} </p>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
-      <!-- Change user info -->
-      <form>
-        <div class="form-group">
-          <label for="name">Name: </label>
-          <input type="text" class="form-control" id="name" [value]="user?.displayName">
-        </div>
-        <div class="form-group">
-          <label for="emailReg">Email: </label>
-          <input type="text" class="form-control" id="emailReg" [value]="user?.email">
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Save changes</button>
-        <button class="btn btn-danger mt-2 ml-2">Delete Profile</button>
-      </form>
+      <!-- FIREBASE FUNCTIONS -->
+      <button type="submit" class="btn cb-soft-btn cb-add-btn" (click)="verifyEmail()">Verify Email</button>
+      <button type="submit" class="btn cb-soft-btn cb-del-btn" (click)="deleteProfile()">Delete Profile</button>
     </div>
   </div>
 </div>

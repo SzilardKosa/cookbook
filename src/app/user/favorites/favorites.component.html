@@ -1,6 +1,8 @@
 <div class="container">
-  <div class="row">
-    <h3 style="margin-left: 5rem;">Favorites</h3>
+  <div class="row text-center">
+    <div class="col-12">
+      <h3 class="display-4 my-4">Your Favorites</h3>
+    </div>
   </div>
 
   <app-recipe-cards [recipes]="favorites$ | async"></app-recipe-cards>

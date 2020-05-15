@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from 'src/app/shared/register/register.component';
 
 @Component({
   selector: 'app-welcome-page',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+  }
+
+  openReg() {
+    this.modalService.open(RegisterComponent,{backdrop: 'static'});
   }
 
 }

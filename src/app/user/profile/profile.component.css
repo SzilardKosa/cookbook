@@ -1,0 +1,52 @@
+@media (max-width: 499.98px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}
+
+.cb-right {
+  text-align: right;
+}
+
+.cb-soft-btn {
+  height: 50px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+
+  outline: none;
+  border:none;
+  cursor: pointer;
+  width:100%;
+  font-family: 'Lato', sans-serif;
+  color:#fff;
+  text-align: center;
+  box-shadow: 3px 3px 8px #b1b1b1,
+              -3px -3px 8px #ffffff;
+  transition: 0.5s;
+}
+
+.cb-add-btn {
+  background: #2482cf;
+}
+
+.cb-add-btn:hover, .cb-add-btn:disabled {
+  background:#3f8bc9;
+}
+
+.cb-add-btn:active {
+  background:#1e68a5;
+}
+
+.cb-del-btn {
+  background: #cf2424;
+}
+
+.cb-del-btn:hover, .cb-del-btn:disabled {
+  background:#cc4646;
+}
+
+.cb-del-btn:active {
+  background:#a01b1b;
+}

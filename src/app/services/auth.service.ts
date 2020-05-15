@@ -65,4 +65,16 @@ export class AuthService {
     return userDoc.update(user);
   }
 
+  isVerified(){
+    return this.afAuth.auth.currentUser.emailVerified;
+  }
+
+  sendEmailVerification(){
+    return this.afAuth.auth.currentUser.sendEmailVerification();
+  }
+
+  deleteProfile(){
+    return this.afAuth.auth.currentUser.delete();
+  }
+
 }
