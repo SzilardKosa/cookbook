@@ -4,6 +4,8 @@ import { Recipe } from '../../models/recipe';
 import { Category } from '../../models/filter';
 import { take } from 'rxjs/operators';
 
+const limit: number = 6;
+
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -22,6 +24,7 @@ export class RecipeListComponent implements OnInit {
     occasions: [],
     specialDiets: []
   };
+  filterCount: number = 0;
 
   constructor(private recipeService: RecipeService) { }
 
@@ -33,16 +36,27 @@ export class RecipeListComponent implements OnInit {
       this.filter.occasions.length > 0 ||
       this.filter.specialDiets.length > 0
     ){
-      this.showSidebar();
+      this.setCounter();
+      if(window.innerWidth > 767){
+        this.showSidebar();
+      }
     }
     this.listState = this.recipeService.getListState();
     this.getFirstRecipes();
   }
 
+  setCounter(){
+    this.filterCount =
+    this.filter.courses.length +
+    this.filter.cuisines.length +
+    this.filter.occasions.length +
+    this.filter.specialDiets.length;
+  }
+
   getFirstRecipes(){
     this.endOfList = false;
     this.recipes = [];
-    this.recipeService.getRecipes()
+    this.recipeService.getRecipes(limit)
     .pipe(take(2)) // cache miatt
     .subscribe( recipes => {
       this.recipes = recipes;
@@ -51,7 +65,7 @@ export class RecipeListComponent implements OnInit {
       } else {
         this.noResult = true;
       }
-      if(recipes.length < 6){
+      if(recipes.length < limit){
         this.endOfList = true;
       }
     })
@@ -59,12 +73,12 @@ export class RecipeListComponent implements OnInit {
 
   getNextRecipes(){
     if (this.noResult || this.endOfList) return;
-    this.recipeService.getRecipes(this.recipes[this.recipes.length - 1].id)
+    this.recipeService.getRecipes(limit, this.recipes[this.recipes.length - 1].id)
     .pipe(take(2)) // cache miatt
     .subscribe( recipes => {
       this.recipes = this.recipes.concat(recipes);
       console.log(recipes);
-      if(recipes.length < 6){
+      if(recipes.length < limit){
         this.endOfList = true;
       }
     })
@@ -78,6 +92,7 @@ export class RecipeListComponent implements OnInit {
   updateFilter(){
     console.log(this.filter);
     this.recipeService.updateFilter(this.filter);
+    this.setCounter();
     this.getFirstRecipes();
   }
 

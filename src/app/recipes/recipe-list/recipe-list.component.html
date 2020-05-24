@@ -25,8 +25,11 @@
       <div class="row justify-content-center">
         <div class="col-12 cb-list-settings d-flex">
     
-          <button class="btn btn-primary mr-auto" (click)="toggleSidebar()">
-            <i class="fas fa-plus"></i> Refine
+          <button class="btn btn-primary mr-auto cb-counter-btn" (click)="toggleSidebar()">
+            <i *ngIf="!sidebarDisplayed" class="fas fa-plus"></i>
+            <i *ngIf="sidebarDisplayed" class="fas fa-minus"></i>
+            Refine
+            <span *ngIf="filterCount!==0" class="cb-counter"> {{filterCount}} </span>
           </button>
     
           <!-- <div class="col-auto">
@@ -83,7 +86,7 @@
   <div class="search-results"
         infiniteScroll
         [infiniteScrollDistance]="2"
-        [infiniteScrollThrottle]="50"
+        [infiniteScrollThrottle]="2000"
         (scrolled)="onScroll()">
   </div>
 

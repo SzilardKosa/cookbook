@@ -2,7 +2,7 @@
   <div class="container">
     
     <!-- Brand -->
-    <a class="navbar-brand" routerLink="/">My Cookbook</a>
+    <a class="navbar-brand" routerLink="/" (click)="collapseNav()">My Cookbook</a>
     
     <!-- Toggler -->
     <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed">
@@ -14,7 +14,9 @@
 
       <!-- Recipes list -->
       <ul class="navbar-nav mt-2 mt-md-0 mr-md-2">
-        <li class="nav-item"><a class="nav-link" routerLink="/recipes" routerLinkActive="active">Recipes</a></li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recipes" routerLinkActive="active" (click)="collapseNav()">Recipes</a>
+        </li>
       </ul>
 
       <!-- Search -->
@@ -36,17 +38,21 @@
 
       <div *ngIf="auth.user$ | async as user; else guest">
         <ul class="navbar-nav mt-2 mt-md-0">
-          <li class="nav-item"><a class="nav-link" routerLink="/add-recipe" routerLinkActive="active">Upload</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/add-recipe" routerLinkActive="active" (click)="collapseNav()">Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/favorites" routerLinkActive="active" (click)="collapseNav()">Favorites</a>
+          </li>
           <!-- <li class="nav-item"><a class="nav-link" routerLink="/calculator" routerLinkActive="active">Calculator</a></li> -->
           <li class="nav-item" ngbDropdown>
             <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown" role="button">
               {{user.displayName}}
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
-              <a ngbDropdownItem routerLink="/profile" routerLinkActive="active">Profile</a>
+              <a ngbDropdownItem routerLink="/profile" routerLinkActive="active" (click)="collapseNav()">Profile</a>
               <div class="dropdown-divider"></div>
-              <a ngbDropdownItem (click)="auth.logout()">Logout</a>
+              <a ngbDropdownItem (click)="auth.logout(); collapseNav()">Logout</a>
             </div>
           </li>
         </ul>

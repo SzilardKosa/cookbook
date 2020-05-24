@@ -32,6 +32,25 @@
   margin-bottom: 2rem;
 }
 
+/* Refine button */
+.cb-counter-btn {
+  position: relative;
+}
+
+.cb-counter {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 15px;
+  background: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Change with of sidebar from 0 to 250px */
 #search-wrapper.sidebarDisplayed #sidebar-wrapper {
   width: 500px;

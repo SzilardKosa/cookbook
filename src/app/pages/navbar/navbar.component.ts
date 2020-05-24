@@ -52,15 +52,23 @@ export class NavbarComponent implements OnInit {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(['/recipes']);
+      this.collapseNav();
+      this.searchText = {};
     }
   }
 
   openLogin() {
     const loginModalRef = this.modalService.open(LoginComponent,{backdrop: 'static'});
+    this.collapseNav();
   }
 
   openReg() {
     const regModalRef = this.modalService.open(RegisterComponent,{backdrop: 'static'});
+    this.collapseNav();
+  }
+
+  collapseNav(){
+    this.isCollapsed = true;
   }
 
 }

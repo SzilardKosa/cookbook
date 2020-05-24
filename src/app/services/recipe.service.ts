@@ -42,7 +42,7 @@ export class RecipeService {
     return this.filter;
   }
 
-  getRecipes(last?: string):Observable<Recipe[]>{
+  getRecipes(count: number, last?: string):Observable<Recipe[]>{
     const filtered = this.afs.collection('recipes', ref => {
       let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       Object.entries(this.filter).forEach(([key, value]) => {
@@ -51,9 +51,9 @@ export class RecipeService {
         })
       });
       if(last){
-        return query.orderBy(firestore.FieldPath.documentId()).limit(6).startAfter(last);
+        return query.orderBy(firestore.FieldPath.documentId()).limit(count).startAfter(last);
       }
-      return query.orderBy(firestore.FieldPath.documentId()).limit(6);
+      return query.orderBy(firestore.FieldPath.documentId()).limit(count);
     });
     return filtered.snapshotChanges().pipe(
       map(actions => actions.map(a => {
