@@ -64,6 +64,17 @@ export class RecipeService {
     )
   }
 
+  getTop5(){
+    const top5 = this.afs.collection('recipes', ref => ref.orderBy('date', 'asc').limit(5));
+    return top5.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Recipe;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
+
   getFavorites(ids: string[]){
     // The in operator max 10 ids can query!!
     const favorites = this.afs.collection('recipes', ref => ref.where(firestore.FieldPath.documentId(), 'in', ids));

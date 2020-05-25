@@ -12,6 +12,7 @@ import { RecipeListviewComponent } from './recipe-listview/recipe-listview.compo
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { AdvertModalComponent } from './advert-modal/advert-modal.component';
+import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 
 
 
@@ -25,6 +26,7 @@ import { AdvertModalComponent } from './advert-modal/advert-modal.component';
     CategorySelectorComponent,
     LoadingSpinnerComponent,
     AdvertModalComponent,
+    RecipeCardComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { AdvertModalComponent } from './advert-modal/advert-modal.component';
     CategorySelectorComponent,
     LoadingSpinnerComponent,
     AdvertModalComponent,
+    RecipeCardComponent,
   ],
   entryComponents: [RegisterComponent, LoginComponent, AdvertModalComponent]
 })

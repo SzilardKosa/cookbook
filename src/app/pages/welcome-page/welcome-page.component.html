@@ -55,12 +55,25 @@
   </div>
   
   <!-- FIVE NEWEST RECIPES -->
-  <div class="row cb-top5">
+  <div class="row cb-top5 text-center">
+    <div class="col-12">
+      <h1 class="display-4 cb-features-title">The TOP5 most recent recipe</h1>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <div class="scene">
+        <div *ngIf="topRecipes?.length > 0" class="carousel" #carousel>
+          <app-recipe-card
+            *ngFor="let recipe of topRecipes"
+            [recipe]="recipe" class="carousel_cell">
+          </app-recipe-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center carousel-buttons">
+      <button type="button" class="cb-cta" (click)="prev()">Previous</button>
+      <button type="button" class="cb-cta" (click)="next()">Next</button>
+    </div>
     
   </div>
 
 </div>
-
-<!-- <div class="cb-bottom-bg1"></div> -->
-
-<!-- <div class="cb-bottom-bg2"></div> -->
