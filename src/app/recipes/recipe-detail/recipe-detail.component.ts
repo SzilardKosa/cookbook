@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -21,7 +21,7 @@ import { RegisterComponent } from 'src/app/shared/register/register.component';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css']
 })
-export class RecipeDetailComponent implements OnInit {
+export class RecipeDetailComponent implements OnInit, OnDestroy  {
   objectKeys = Object.keys;
   recipe$: Observable<Recipe>;
   recipeID: string;
@@ -30,6 +30,7 @@ export class RecipeDetailComponent implements OnInit {
   private currentUser: User;
   ratingLabel:string = "0 (0)";
   myRatingControl = new FormControl('');
+  subscrition: any;
   
   constructor(
     private route: ActivatedRoute,
@@ -40,11 +41,14 @@ export class RecipeDetailComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) { }
+  ngOnDestroy(): void {
+    this.subscrition.unsubscribe();
+  }
 
   ngOnInit() {
     this.recipeID = this.route.snapshot.paramMap.get('id');
     this.recipe$ = this.recipeService.getRecipe(this.recipeID);
-    this.recipe$.subscribe(recipe => {
+    this.subscrition = this.recipe$.subscribe(recipe => {
       this.currentRecipe = recipe;
       if(typeof this.currentRecipe.ratings !== 'undefined') this.updateStars();
     });
