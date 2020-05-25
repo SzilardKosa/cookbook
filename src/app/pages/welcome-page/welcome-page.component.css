@@ -158,6 +158,7 @@ i.fas{
 
 .cb-feature {
   padding: 4rem 0;
+  max-width: 30rem;
 }
 
 .cb-features p{

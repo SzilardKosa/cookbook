@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from 'src/app/shared/register/register.component';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-welcome-page',
@@ -13,7 +14,7 @@ export class WelcomePageComponent implements OnInit {
   @ViewChild('carousel', {static: false}) carousel: ElementRef;
   cellCount:number = 5;
   selectedIndex:number = 0;
-  topRecipes: Recipe[];
+  topRecipes$:  Observable<Recipe[]>;
 
   constructor(
     private modalService: NgbModal,
@@ -21,10 +22,7 @@ export class WelcomePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.recipeService.getTop5().subscribe( recipes => {
-      console.log(recipes);
-      this.topRecipes = recipes;
-    })
+    this.topRecipes$ = this.recipeService.getTop5();
   }
 
   openReg() {

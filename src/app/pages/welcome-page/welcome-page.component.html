@@ -12,16 +12,15 @@
     <!-- TITLE -->
     <div class="col-md-6 cb-title">
       <h1 class="cb-title-text">Cookbook</h1>
-      <p class="cb-intro-text">Lorem ipsum dolor sit amet, pri in noster propriae adolescens,
-         qui volumus nostrum instructior ut, eam et quis iisque. Per ad 
-         facete latine reprimique. Id integre impedit tibique pro. Ius 
-         id mutat civibus pertinax.</p>
+      <p class="cb-intro-text">Welcome to my cookbook website. It is an easy-to-use
+        platform to share your recipes with the world. Supports a wide range of
+        devices, from mobile to desktop.</p>
       <button type="button" class="cb-cta" (click)="openReg()">Register Now</button>
     </div>
   </div>
 
   <!-- FEATURES FOR USERS -->
-  <div class="row cb-features text-center">
+  <div class="row cb-features text-center d-flex justify-content-center">
     <div class="col-12">
       <h1 class="display-4 cb-features-title">Available features for registered users</h1>
     </div>
@@ -30,27 +29,25 @@
         <i class="fas fa-bookmark fa-4x"></i>
       </div>
 			<h3>Save favorites</h3>
-			<p>Lorem ipsum dolor sit amet, pri in noster propriae adolescens,
-        qui volumus nostrum instructior ut, eam et quis iisque. Per ad 
-        facete latine reprimique.</p>
+			<p>Registered users have the option to save their beloved recipes in their own
+        favorites collection. This makes accessibility much easier.</p>
 		</div>
 		<div class="col-12 col-sm-6 col-md-4 cb-feature">
       <div class="cb-icon">
         <i class="fas fa-star fa-4x"></i>
       </div>
 			<h3>Rate recipes</h3>
-			<p>Lorem ipsum dolor sit amet, pri in noster propriae adolescens,
-        qui volumus nostrum instructior ut, eam et quis iisque. Per ad 
-        facete latine reprimique.</p>
+			<p>If you have a strong feeling about a certain recipe. Let others know about it
+        by giving the appropriate rating. It will make delicious recipes stand out more
+        or make it obvious if the look doesn't match the taste.</p>
 		</div>
 		<div class="col-md-4 cb-feature">
       <div class="cb-icon">
         <i class="fas fa-file-upload fa-4x"></i>
       </div>
 			<h3>Upload new recipes</h3>
-			<p>Lorem ipsum dolor sit amet, pri in noster propriae adolescens,
-        qui volumus nostrum instructior ut, eam et quis iisque. Per ad 
-        facete latine reprimique.</p>
+			<p>By becoming a user you will have the option to share your recipes with others.
+        You can also add categories to your recipe, making it easier for others to find.</p>
 		</div>
   </div>
   
@@ -61,9 +58,9 @@
     </div>
     <div class="col-12 d-flex justify-content-center">
       <div class="scene">
-        <div *ngIf="topRecipes?.length > 0" class="carousel" #carousel>
+        <div class="carousel" #carousel>
           <app-recipe-card
-            *ngFor="let recipe of topRecipes"
+            *ngFor="let recipe of topRecipes$ | async"
             [recipe]="recipe" class="carousel_cell">
           </app-recipe-card>
         </div>
@@ -71,7 +68,7 @@
     </div>
     <div class="col-12 d-flex justify-content-center carousel-buttons">
       <button type="button" class="cb-cta" (click)="prev()">Previous</button>
-      <button type="button" class="cb-cta" (click)="next()">Next</button>
+      <button type="button" class="cb-cta ml-1" (click)="next()">Next</button>
     </div>
     
   </div>

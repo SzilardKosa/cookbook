@@ -13,6 +13,7 @@ export interface Recipe {
   categories: Category,
   id?: string,
   ratings?: Object
+  fromCache?: boolean
 }
 
 export interface Ingredient {

@@ -67,12 +67,14 @@ export class RecipeListComponent implements OnInit {
       }
       if(recipes.length < limit){
         this.endOfList = true;
+      } else {
+        this.endOfList = false;
       }
     })
   }
 
   getNextRecipes(){
-    if (this.noResult || this.endOfList) return;
+    if (this.noResult || this.endOfList || this.recipes.length < limit) return;
     this.recipeService.getRecipes(limit, this.recipes[this.recipes.length - 1].id)
     .pipe(take(2)) // cache miatt
     .subscribe( recipes => {
